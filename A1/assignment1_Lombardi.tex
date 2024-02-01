@@ -1,0 +1,65 @@
+\documentclass[]{article}
+	
+\usepackage[margin=1in]{geometry}		% For setting margins
+\usepackage{amsmath}				% For Math
+\usepackage{fancyhdr}				% For fancy header/footer
+\usepackage{graphicx}				% For including figure/image
+\usepackage{cancel}					% To use the slash to cancel out stuff in work
+\usepackage{tikz}
+\usetikzlibrary{quantikz2}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Set up fancy header/footer
+\pagestyle{fancy}
+\fancyhead[LO,L]{Anthony J. Lombardi}
+\fancyhead[CO,C]{CS569: Quantum Info and Computing}
+\fancyhead[RO,R]{\today}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\section*{Assignment 1}
+\begin{enumerate}
+  % Question 4
+  \item Describe a quantum circuit that starting with \ket{000} prepares the output state:
+
+  \begin{equation*}
+    \ket{\psi} = \frac{1}{\sqrt{2}}(\ket{000} + \ket{111}) 
+  \end{equation*}
+
+  The following 3 stage circuit will produce the desiried output state:
+  \begin{center}
+    \begin{quantikz}
+      & \gate{H} \slice{1} & \ctrl{1} \slice{2} & & & \\
+      & & \targ{} & \ctrl{1} \slice{3} & & \\
+      & & & \targ{} & &
+    \end{quantikz}
+  \end{center}
+
+  \begin{itemize}
+    \item Stage 1 - Hadamard Gate: 
+      \begin{align*}
+        \ket{0} \otimes \ket{0} \otimes \ket{0} \xrightarrow{H \otimes I \otimes I} \frac{\ket{0} \otimes \ket{1}}{\sqrt{2}} \otimes \ket{0} \otimes \ket{0} \\
+        = \frac{1}{\sqrt{2}}(\ket{000} + \ket{100}) 
+      \end{align*}
+    \item Stage 2 - 1$^{\text{st}}$ Control Not:
+
+      Just looking at the first two qubits of the superposition. The first qubit is the control bit and second qubit is the bit we may modifiy.
+      \begin{align*}
+        & \frac{1}{\sqrt{2}}(\ket{000} + \ket{100}) \xrightarrow{\text{CNOT}} \frac{1}{\sqrt{2}}(\ket{000} + \ket{110}) 
+      \end{align*}
+    \item Stage 3 - 2$^{\text{nd}}$ Control Not:
+      
+      Just looking at the last two qubits of the superposition.  The second qubit is the control bit and the third qubit is the bit we may modify
+      \begin{align*}
+        & \frac{1}{\sqrt{2}}(\ket{000} + \ket{110}) \xrightarrow{\text{CNOT}} \frac{1}{\sqrt{2}}(\ket{000} + \ket{111}) 
+      \end{align*}
+  \end{itemize}
+
+
+\end{enumerate}
+\end{document}
