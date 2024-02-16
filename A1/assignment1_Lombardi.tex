@@ -1,10 +1,11 @@
 \documentclass[]{article}
 	
 \usepackage[margin=1in]{geometry}		% For setting margins
-\usepackage{amsmath}				% For Math
-\usepackage{fancyhdr}				% For fancy header/footer
-\usepackage{graphicx}				% For including figure/image
-\usepackage{cancel}					% To use the slash to cancel out stuff in work
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{cancel}
 \usepackage{tikz}
 \usetikzlibrary{quantikz2}
 
@@ -24,6 +25,110 @@
 \begin{document}
 \section*{Assignment 1}
 \begin{enumerate}
+  % Question 1
+ \item Show that the Hadamard gate \textit{almost} commutes with the Pauli gates.
+
+   Using the Pauli gates X and Z we can show that the Hadamard gate almost commutes.
+   \begin{center}
+    X*H = H*Z \\
+
+    \[
+    X*H = 
+      \begin{bmatrix}
+        0 & 1 \\
+        1 & 0 \\
+      \end{bmatrix}
+     * 
+     \begin{bmatrix}
+       1 & 1 \\
+       1 & -1 \\
+     \end{bmatrix}
+     = 
+     \begin{bmatrix}
+       1 & -1 \\
+       1 & 1 \\
+     \end{bmatrix}
+    \]
+
+    \[
+    H*Z= 
+     \begin{bmatrix}
+       1 & 1 \\
+       1 & -1 \\
+     \end{bmatrix}
+     *
+     \begin{bmatrix}
+       1 & 0 \\
+       0 & -1 \\
+     \end{bmatrix}
+     = 
+     \begin{bmatrix}
+       1 & -1 \\
+       1 & 1 \\
+     \end{bmatrix}
+    \]
+   \end{center}
+
+
+  % Question 2
+  \item Show that the Bell states form a basis of all two-qubit states.
+
+    \begin{quantikz}
+      & \gate{H} & \ctrl{1} & \\
+      & & \targ{} &
+    \end{quantikz}
+
+        Bell states $\ket{\beta_{00}}$ and $\ket{\beta_{10}}$ can be combind to form $\ket{00}$.
+
+        \begin{align*}
+          \ket{00} = \ket{\beta_{00}} + \ket{\beta_{10}} \\
+          = \frac{\ket{00} + \ket{11}}{\sqrt{2}} + \frac{\ket{00} - \ket{11}}{\sqrt{2}} \\
+          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} + \frac{1}{\sqrt{2}} \ket{00} - \frac{1}{\sqrt{2}} \ket{11} \\ 
+          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} - \frac{1}{\sqrt{2}} \ket{11} \\  
+          = \frac{2}{\sqrt{2}} \ket{00} + 0 \ket{11} \\
+        \end{align*}
+
+        Normalize the qubit.
+        \begin{align*}
+          = 1 \ket{00} + 0 \ket{11} \\ 
+          = \ket{00}
+        \end{align*}
+
+        Bell states $\ket{\beta_{00}}$ and $\ket{\beta_{10}}$ can be combind to form $\ket{11}$.
+
+        \begin{align*}
+          \ket{11} = \ket{\beta_{00}} - \ket{\beta_{10}} \\
+          = \frac{\ket{00} + \ket{11}}{\sqrt{2}} - \frac{\ket{00} - \ket{11}}{\sqrt{2}} \\
+          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} - (\frac{1}{\sqrt{2}} \ket{00} - \frac{1}{\sqrt{2}} \ket{11}) \\ 
+          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} - \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} \\ 
+          = \frac{1}{\sqrt{2}} \ket{00} - \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} + \frac{1}{\sqrt{2}} \ket{11} \\  
+          = 0 \ket{00} + \frac{2}{\sqrt{2}} \ket{11}\\ 
+        \end{align*}
+
+        Normalize the qubit.
+        \begin{align*}
+          = 0 \ket{00} + 1 \ket{11} \\ 
+          = \ket{11}
+        \end{align*}
+
+        Similary, $\ket{\beta_{01}}$ and $\ket{\beta_{11}}$ can be combind to form $\ket{01}$ and $\ket{10}$.
+
+        \begin{align*}
+          \ket{01} = \ket{\beta_{01}} + \ket{\beta_{11}} \\
+          = \frac{1}{\sqrt{2}} (\ket{01} + \ket{10}) + \frac{1}{\sqrt{2}} (\ket{01} - \ket{10})\\
+          = \frac{2}{\sqrt{2}} \ket{01} + 0 \ket{10}
+        \end{align*}
+
+        \begin{align*}
+          \ket{10} = \ket{\beta_{01}} - \ket{\beta_{11}} \\
+          = \frac{1}{\sqrt{2}} (\ket{01} + \ket{10}) - \frac{1}{\sqrt{2}} (\ket{01} - \ket{10})\\
+          = 0 \ket{01} + \frac{2}{\sqrt{2}} \ket{10} 
+        \end{align*}
+
+  %Queston 3
+  \item Explain what does it mean to perform a Bell basis measurement of a two-qubit state\dots
+
+
   % Question 4
   \item Describe a quantum circuit that starting with \ket{000} prepares the output state:
 
@@ -43,7 +148,7 @@
   \begin{itemize}
     \item Stage 1 - Hadamard Gate: 
       \begin{align*}
-        \ket{0} \otimes \ket{0} \otimes \ket{0} \xrightarrow{H \otimes I \otimes I} \frac{\ket{0} \otimes \ket{1}}{\sqrt{2}} \otimes \ket{0} \otimes \ket{0} \\
+        \ket{0} \otimes \ket{0} \otimes \ket{0} \xrightarrow{H \otimes I \otimes I} \frac{\ket{0} + \ket{1}}{\sqrt{2}} \otimes \ket{0} \otimes \ket{0} \\
         = \frac{1}{\sqrt{2}}(\ket{000} + \ket{100}) 
       \end{align*}
     \item Stage 2 - 1$^{\text{st}}$ Control Not:

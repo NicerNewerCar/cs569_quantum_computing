@@ -1,0 +1,102 @@
+
+\documentclass[]{article}
+	
+\usepackage[margin=1in]{geometry}		% For setting margins
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{tikz}
+\usetikzlibrary{quantikz2}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Set up fancy header/footer
+\pagestyle{fancy}
+\fancyhead[LO,L]{Anthony J. Lombardi}
+\fancyhead[CO,C]{CS569: Quantum Info and Computing}
+\fancyhead[RO,R]{\today}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  \section*{Assignment 2}
+    \begin{enumerate}
+      % Question 1
+      \item Consider the Bell state $\ket{\beta_{00}}$, suppose both qubits are measured in the diagonal basis. 
+        What are the outcomes?
+
+        We know that $\ket{\beta_{00}}$ is equivalent to $\frac{1}{\sqrt{2}}(\ket{00} + \ket{11})$ in order 
+        to mesaure in the diagonal basis. To do this, we need to express $\ket{\beta_{00}}$ 
+        in terms of $\{\ket{+}, \ket{-}\}$ rather than $\{\ket{0}, \ket{1}\}$.
+        Luckily we know that $\ket{0} = \frac{1}{\sqrt{2}}(\ket{+} + \ket{-})$ and that
+        $\ket{1} = \frac{1}{\sqrt{2}}(\ket{+} - \ket{-})$\footnote{T. Wong, Introduction to 
+        Classical and Quantum Computing, Rooted Grove, 2022. Page 87}. 
+
+        Subsituting this questions into $\ket{\beta_{00}}$:
+
+        \begin{gather*}
+          \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}) \\
+          = \frac{1}{\sqrt{2}}[(\frac{1}{\sqrt{2}}(\ket{+} + \ket{-}) \otimes \frac{1}{\sqrt{2}}(\ket{+} + \ket{-}))
+          + (\frac{1}{\sqrt{2}}(\ket{+} - \ket{-}) \otimes \frac{1}{\sqrt{2}}(\ket{+} - \ket{-}))] \\
+          \\
+          = \frac{1}{\sqrt{2}}[\frac{1}{2}((\ket{+} + \ket{-}) \otimes (\ket{+} + \ket{-}))
+          + \frac{1}{2}((\ket{+} - \ket{-}) \otimes (\ket{+} - \ket{-}))] \\
+          \\
+          = \frac{1}{\sqrt{2}}\frac{1}{2}[(\ket{++} + \ket{+-} + \ket{-+} + \ket{--})
+          + (\ket{++} - \ket{+-} - \ket{-+} + \ket{--})] \\
+          \\
+          = \frac{1}{\sqrt{2}}[(\ket{++} + \ket{--})] \\
+        \end{gather*}
+
+        % Now we need to mesaure each qubit
+      
+      % Question 2
+      \item Describe a quantum teleportation circuit when ALice and Bob shared the Bell state
+        $\ket{\beta_{11}}$ instead of $\ket{\beta_{00}}$.
+
+        The following circuit will successfully teleport an arbitrary qubit, $\ket{\psi}$, between Alice and Bob.
+
+        \begin{quantikz}
+          \lstick{\ket{\psi}} & \ctrl{1} & \gate{H} & \meter{} & \setwiretype{c}&  \gate{NOT} && \ctrl[vertical wire=c]{2}\\ 
+          \lstick[2]{\ket{\beta_{11}}} & \targ{} && \meter{} & \setwiretype{c} & \gate{NOT} & \ctrl[vertical wire=c]{1}\\ 
+                                       & &&& && \gate{x}& \gate{z} & \rstick{\ket{\psi}}
+        \end{quantikz}
+
+        Proof:
+
+        \begin{gather*}
+          \ket{\psi} \otimes \ket{\beta_{11}} = (a\ket{0} + b\ket{1}) \otimes \frac{\ket{01} - \ket{10}}{\sqrt{2}} \\
+          = a\ket{0} \otimes \frac{\ket{01} - \ket{10}}{\sqrt{2}} + 
+          b\ket{1} \otimes \frac{\ket{01} - \ket{10}}{\sqrt{2}} \\
+          = \frac{1}{\sqrt{2}}[a\ket{001} - a\ket{010} + b\ket{101} - b\ket{110}]\\
+          \xrightarrow{\text{CNOT}} \frac{1}{\sqrt{2}}[a\ket{001} - a\ket{010} + b\ket{111} - b\ket{100}]\\
+          \xrightarrow{H \otimes I \otimes I}
+          \frac{1}{\sqrt{2}}[a \frac{\ket{0} + \ket{1}}{\sqrt{2}}(\ket{01} - \ket{10}) + 
+          b\frac{\ket{0} - \ket{1}}{\sqrt{2}} (\ket{11} - \ket{00})]\\
+          = \frac{1}{2}[(a\ket{0} + a\ket{1})(\ket{01} - \ket{10}) + 
+          (b\ket{0} - b\ket{1})(\ket{11} - \ket{00})]\\
+          = \frac{1}{2}[a\ket{001} - a\ket{010} + a\ket{101} - a\ket{110} +
+          b\ket{011} - b\ket{000} + b\ket{111} - b\ket{100}] \\
+          = \frac{1}{2}[\ket{00}(a\ket{1}-b\ket{0}) - \ket{01}(a\ket{0} - b\ket{1})
+          + \ket{10}(a\ket{1} + b\ket{0}) - \ket{11}(a\ket{0} + b\ket{1})]\\
+        \end{gather*}
+
+        Now messuring the first two qubits gets us:
+
+        \[ \begin{cases} 
+          \ket{00} XZ\ket{\psi} & \text{w.p. } \frac{1}{4} \\
+          \ket{01} Z\ket{\psi} & \text{w.p. } \frac{1}{4} \\
+          \ket{10} X\ket{\psi} & \text{w.p. } \frac{1}{4} \\
+          \ket{11} \ket{\psi} & \text{w.p. } \frac{1}{4} \\
+          \end{cases}
+        \]
+
+
+    \end{enumerate}
+
+\end{document} 
