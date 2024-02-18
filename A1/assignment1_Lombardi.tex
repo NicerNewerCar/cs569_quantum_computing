@@ -80,54 +80,97 @@
 
         Bell states $\ket{\beta_{00}}$ and $\ket{\beta_{10}}$ can be combind to form $\ket{00}$.
 
-        \begin{align*}
-          \ket{00} = \ket{\beta_{00}} + \ket{\beta_{10}} \\
+        \begin{gather*}
+          \ket{\beta_{00}} + \ket{\beta_{10}} \\
           = \frac{\ket{00} + \ket{11}}{\sqrt{2}} + \frac{\ket{00} - \ket{11}}{\sqrt{2}} \\
-          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} + \frac{1}{\sqrt{2}} \ket{00} - \frac{1}{\sqrt{2}} \ket{11} \\ 
-          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} - \frac{1}{\sqrt{2}} \ket{11} \\  
+          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} + \frac{1}{\sqrt{2}} \ket{00}
+          - \frac{1}{\sqrt{2}} \ket{11} \\ 
+          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11}
+          - \frac{1}{\sqrt{2}} \ket{11} \\  
           = \frac{2}{\sqrt{2}} \ket{00} + 0 \ket{11} \\
-        \end{align*}
+        \end{gather*}
 
-        Normalize the qubit.
-        \begin{align*}
-          = 1 \ket{00} + 0 \ket{11} \\ 
-          = \ket{00}
-        \end{align*}
+        Normalize with $\frac{1}{\sqrt{2}}$:
 
+        \begin{gather*}
+          \frac{1}{\sqrt{2}} * (\frac{2}{\sqrt{2}} \ket{00} + 0 \ket{11})\\
+          = \frac{2}{2} \ket{00} + 0 \ket{11} \\ \\
+          \therefore \ket{00} = \frac{1}{\sqrt{2}}(\ket{\beta_{00}} + \ket{\beta_{10}})
+        \end{gather*}
+
+        \pagebreak
+        
         Bell states $\ket{\beta_{00}}$ and $\ket{\beta_{10}}$ can be combind to form $\ket{11}$.
 
-        \begin{align*}
-          \ket{11} = \ket{\beta_{00}} - \ket{\beta_{10}} \\
+        \begin{gather*}
+          \ket{\beta_{00}} - \ket{\beta_{10}} \\
           = \frac{\ket{00} + \ket{11}}{\sqrt{2}} - \frac{\ket{00} - \ket{11}}{\sqrt{2}} \\
-          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} - (\frac{1}{\sqrt{2}} \ket{00} - \frac{1}{\sqrt{2}} \ket{11}) \\ 
-          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} - \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} \\ 
-          = \frac{1}{\sqrt{2}} \ket{00} - \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} + \frac{1}{\sqrt{2}} \ket{11} \\  
+          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} - (\frac{1}{\sqrt{2}} \ket{00} 
+          - \frac{1}{\sqrt{2}} \ket{11}) \\ 
+          = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} - \frac{1}{\sqrt{2}} \ket{00} 
+          + \frac{1}{\sqrt{2}} \ket{11} \\ 
+          = \frac{1}{\sqrt{2}} \ket{00} - \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11} 
+          + \frac{1}{\sqrt{2}} \ket{11} \\  
           = 0 \ket{00} + \frac{2}{\sqrt{2}} \ket{11}\\ 
-        \end{align*}
+        \end{gather*}
 
-        Normalize the qubit.
-        \begin{align*}
-          = 0 \ket{00} + 1 \ket{11} \\ 
-          = \ket{11}
-        \end{align*}
+        Normalize with $\frac{1}{\sqrt{2}}$:
 
+        \begin{gather*}
+          \frac{1}{\sqrt{2}} * (0  \ket{00} + \frac{2}{\sqrt{2}} \ket{11})\\
+          =  0 \ket{00} + \frac{2}{2} \ket{11} \\ \\
+          \therefore \ket{11} = \frac{1}{\sqrt{2}}(\ket{\beta_{00}} - \ket{\beta_{10}})
+        \end{gather*}
+        
         Similary, $\ket{\beta_{01}}$ and $\ket{\beta_{11}}$ can be combind to form $\ket{01}$ and $\ket{10}$.
 
-        \begin{align*}
-          \ket{01} = \ket{\beta_{01}} + \ket{\beta_{11}} \\
+        \begin{gather*}
+          \ket{\beta_{01}} + \ket{\beta_{11}} \\
           = \frac{1}{\sqrt{2}} (\ket{01} + \ket{10}) + \frac{1}{\sqrt{2}} (\ket{01} - \ket{10})\\
-          = \frac{2}{\sqrt{2}} \ket{01} + 0 \ket{10}
-        \end{align*}
+          = \frac{2}{\sqrt{2}} \ket{01} + 0 \ket{10} \\ \\
+          \therefore \ket{01} = \frac{1}{\sqrt{2}}(\ket{\beta_{01}} + \ket{\beta_{11}})
+        \end{gather*}
 
-        \begin{align*}
-          \ket{10} = \ket{\beta_{01}} - \ket{\beta_{11}} \\
+        \begin{gather*}
+          \ket{\beta_{01}} - \ket{\beta_{11}} \\
           = \frac{1}{\sqrt{2}} (\ket{01} + \ket{10}) - \frac{1}{\sqrt{2}} (\ket{01} - \ket{10})\\
-          = 0 \ket{01} + \frac{2}{\sqrt{2}} \ket{10} 
-        \end{align*}
+          = 0 \ket{01} + \frac{2}{\sqrt{2}} \ket{10} \\ \\
+          \therefore \ket{10} = \frac{1}{\sqrt{2}}(\ket{\beta_{01}} - \ket{\beta_{11}})
+        \end{gather*}
 
-  %Queston 3
-  \item Explain what does it mean to perform a Bell basis measurement of a two-qubit state\dots
+  % Queston 3
+  \item Explain what does it mean to perform a Bell basis measurement of a two-qubit state.
 
+    Performing a Bell basis measurement on an arbitray two-qubit state would determine which of 
+    the four bell states those qubits are in (with a certain probability for each $\beta$). For 
+    example if we put the state $\ket{00}$ through the circuit we can get:
+
+    \begin{gather*}
+      \ket{00} \xrightarrow{\text{CNOT}} \ket{00} \xrightarrow{H \otimes I} 
+      \frac{\ket{0} + \ket{1}}{\sqrt{2}} \otimes \ket{0}\\
+      = \frac{1}{\sqrt{2}}[\ket{00} + \ket{10}]
+    \end{gather*}
+
+    Since we know we can express any 2 qubit state as a linear combination of two Bell states we can re-write
+    the result to be in this form.
+
+    \begin{gather*}
+      \frac{1}{\sqrt{2}}[\ket{00} + \ket{10}]
+      = \frac{1}{\sqrt{2}}[\frac{1}{\sqrt{2}}(\ket{\beta_{00}} + \ket{\beta_{10}})
+      + \frac{1}{\sqrt{2}}(\ket{\beta_{01}} - \ket{\beta_{11}})]\\
+      = \frac{1}{2}[\ket{\beta_{00}} + \ket{\beta_{10}} + \ket{\beta_{01}} - \ket{\beta_{11}}]
+    \end{gather*}
+
+    We can also rewrite the measurement:
+
+    \[ 
+      \begin{cases} 
+        \ket{\beta_{00}} & \text{w.p. } \frac{1}{4} \\
+        \ket{\beta_{01}} & \text{w.p. } \frac{1}{4} \\
+        \ket{\beta_{10}} & \text{w.p. } \frac{1}{4} \\
+        \ket{\beta_{11}} & \text{w.p. } \frac{1}{4} \\
+      \end{cases}
+    \]
 
   % Question 4
   \item Describe a quantum circuit that starting with \ket{000} prepares the output state:
@@ -147,24 +190,59 @@
 
   \begin{itemize}
     \item Stage 1 - Hadamard Gate: 
-      \begin{align*}
-        \ket{0} \otimes \ket{0} \otimes \ket{0} \xrightarrow{H \otimes I \otimes I} \frac{\ket{0} + \ket{1}}{\sqrt{2}} \otimes \ket{0} \otimes \ket{0} \\
+      \begin{gather*}
+        \ket{0} \otimes \ket{0} \otimes \ket{0} \xrightarrow{H \otimes I \otimes I} 
+        \frac{\ket{0} + \ket{1}}{\sqrt{2}} \otimes \ket{0} \otimes \ket{0} \\
         = \frac{1}{\sqrt{2}}(\ket{000} + \ket{100}) 
-      \end{align*}
+      \end{gather*}
     \item Stage 2 - 1$^{\text{st}}$ Control Not:
 
       Just looking at the first two qubits of the superposition. The first qubit is the control bit and second qubit is the bit we may modifiy.
-      \begin{align*}
-        & \frac{1}{\sqrt{2}}(\ket{000} + \ket{100}) \xrightarrow{\text{CNOT}} \frac{1}{\sqrt{2}}(\ket{000} + \ket{110}) 
-      \end{align*}
+      \begin{gather*}
+        \frac{1}{\sqrt{2}}(\ket{000} + \ket{100}) \xrightarrow{\text{CNOT}} \frac{1}{\sqrt{2}}(\ket{000} + \ket{110}) 
+      \end{gather*}
     \item Stage 3 - 2$^{\text{nd}}$ Control Not:
       
       Just looking at the last two qubits of the superposition.  The second qubit is the control bit and the third qubit is the bit we may modify
-      \begin{align*}
-        & \frac{1}{\sqrt{2}}(\ket{000} + \ket{110}) \xrightarrow{\text{CNOT}} \frac{1}{\sqrt{2}}(\ket{000} + \ket{111}) 
-      \end{align*}
+      \begin{gather*}
+        \frac{1}{\sqrt{2}}(\ket{000} + \ket{110}) \xrightarrow{\text{CNOT}} \frac{1}{\sqrt{2}}(\ket{000} + \ket{111}) 
+      \end{gather*}
   \end{itemize}
 
+  % Question 5
+  \item Suppose that Alice and Bob share a Bell state, and that
+  Bob and Charlie share another a different Bell state. Confirm (or deny) that the protocol
+  below where we perform a Bell measurement on Bob’s particles will create an entangled
+  pair between Alice and Charlie.
+
+  Yes, this circuit will produce an entangled pair between Alice and Charlie. We can observe the 
+  following with using the input $\ket{0000}$:
+
+  \begin{gather*}
+    \ket{00} \otimes \ket{00} \xrightarrow{\text{create bell states}} \frac{1}{\sqrt{2}}[\ket{00} + \ket{11}] \otimes
+    \frac{1}{\sqrt{2}}[\ket{00} + \ket{11}]\\ 
+    = \frac{1}{\sqrt{2}}[\ket{0000} + \ket{0011} + \ket{1100} + \ket{1111}]\\
+    \text{Rewrite middle states in terms of Bell states.}\\
+    \frac{1}{2\sqrt{2}}[
+    \ket{0}(\ket{\beta_{00}} + \ket{\beta_{10}})\ket{0}
+    + \ket{0}(\ket{\beta_{01}} + \ket{\beta_{11}})\ket{1}
+    + \ket{1}(\ket{\beta_{01}} - \ket{\beta_{11}})\ket{0}
+    + \ket{1}(\ket{\beta_{00}} - \ket{\beta_{10}})\ket{1}
+    ]\\
+    = \frac{1}{2\sqrt{2}}[\ket{0\beta_{00}0} + \ket{0\beta_{10}0} + \ket{0\beta_{01}1} 
+    + \ket{0\beta_{11}1} +\ket{1\beta_{01}0} - \ket{1\beta_{11}0} +\ket{1\beta_{00}1} 
+    + \ket{1\beta_{10}1}]\\
+    = \frac{1}{2\sqrt{2}}[\ket{\beta_{00}}(\ket{00} + \ket{11}) + \ket{\beta_{01}}(\ket{01} + \ket{10}) 
+    + \ket{\beta_{10}}(\ket{00} - \ket{11}) + \ket{\beta_{11}}(\ket{01} - \ket{10})]\\
+    = \frac{1}{2}[\ket{\beta_{00}}\frac{1}{\sqrt{2}}(\ket{00} + \ket{11}) \\
+    + \ket{\beta_{01}}\frac{1}{\sqrt{2}}(\ket{01} + \ket{10})\\
+    + \ket{\beta_{10}}\frac{1}{\sqrt{2}}(\ket{00} - \ket{11})\\
+    + \ket{\beta_{11}}\frac{1}{\sqrt{2}}(\ket{01} - \ket{10})]\\
+  \end{gather*}
+
+  The next step in the circuit would be to messure the middle two qubits in the Bell basis. As you can see
+  no matter which Bell state we messure the result will always be an entangled pair with the first and last
+  qubits.
 
 \end{enumerate}
 \end{document}
