@@ -1,4 +1,3 @@
-
 \documentclass[]{article}
 	
 \usepackage[margin=1in]{geometry}		% For setting margins
@@ -53,6 +52,17 @@
           = \frac{1}{\sqrt{2}}[(\ket{++} + \ket{--})] \\
         \end{gather*}
 
+        Messuring the state:
+
+        \[
+          \begin{cases}
+            \ket{++} & \text{w.p. } \frac{1}{2} \\
+            \ket{+-} & \text{w.p. } 0\\
+            \ket{-+} & \text{w.p. } 0 \\
+            \ket{--} & \text{w.p. } \frac{1}{2} \\
+          \end{cases}
+        \]
+
         % Now we need to mesaure each qubit
       
       % Question 2
@@ -62,11 +72,12 @@
         The following circuit will successfully teleport an arbitrary qubit, $\ket{\psi}$, between Alice and Bob.
 
         \begin{quantikz}
-          \lstick{\ket{\psi}} & \ctrl{1} & \gate{H} & \meter{} & \setwiretype{c}&  \gate{NOT} && \ctrl[vertical wire=c]{2}\\ 
-          \lstick[2]{\ket{\beta_{11}}} & \targ{} && \meter{} & \setwiretype{c} & \gate{NOT} & \ctrl[vertical wire=c]{1}\\ 
-                                       & &&& && \gate{x}& \gate{z} & \rstick{\ket{\psi}}
+          \lstick{\ket{\psi}} & \ctrl{1} & \gate{H} & \meter{} & \setwiretype{c}&  \octrl[vertical wire=c]{2}\\ 
+          \lstick[2]{\ket{\beta_{11}}} & \targ{} && \meter{} & \setwiretype{c} &  & \octrl[vertical wire=c]{1}\\ 
+                                       & &&& & \gate{x}& \gate{z} & \rstick{\ket{\psi}}
         \end{quantikz}
 
+        \pagebreak
         Proof:
 
         \begin{gather*}
@@ -96,6 +107,59 @@
           \end{cases}
         \]
 
+
+      % Question 3
+      \item Suppose Alice and Bob shared a Bell state $\ket{\beta}$ and wanted to share a secret
+        clasical bit. Explain how they can do this without any commincation. What if they forget whether
+        to messure in the rectilinear or diagonal basis? Can they still share the secret bit?
+
+      % Question 4
+      \item Gate teleportation
+
+        Input
+
+        \begin{gather*}
+          \ket{\alpha} \otimes \ket{\beta_{00}} \otimes \ket{\beta_{00}} \otimes \ket{\omega}\\
+          =(\alpha_1 \ket{0} + \alpha_2 \ket{1}) \otimes \frac{1}{\sqrt{2}}(\ket{00} + \ket{11})
+          \otimes \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}) \otimes (\omega_1 \ket{0} + \omega_2 \ket{1})\\
+          =\frac{1}{\sqrt{2}}[\alpha_1 \ket{000} + \alpha_1 \ket{011} + \alpha_2 \ket{100} + \alpha_2 \ket{111}]
+          \otimes \frac{1}{\sqrt{2}}[\omega_1 \ket{000} + \omega_2 \ket{001} + 
+          \omega_1 \ket{110} + \omega_2 \ket{111}]\\
+        \end{gather*}
+
+        Bell Basis Messurement circuit
+
+        \begin{gather*}
+          \xrightarrow{\text{CNOT(S)}}  \frac{1}{\sqrt{2}}[\alpha_1 \ket{000} + \alpha_1 \ket{011} + 
+          \alpha_2 \ket{110} + \alpha_2 \ket{101}]
+          \otimes \frac{1}{\sqrt{2}}[\omega_1 \ket{000} + \omega_2 \ket{011} + 
+          \omega_1 \ket{110} + \omega_2 \ket{101}]\\
+          = \frac{1}{\sqrt{2}}[\alpha_1 \ket{0}(\ket{00} + \ket{11}) + \alpha_2 \ket{1}(\ket{10} + \ket{01})]
+          \otimes \frac{1}{\sqrt{2}}[(\ket{00} + \ket{11}) \omega_1 \ket{0} + (\ket{01} + \ket{10}) \omega_2 \ket{1}]\\
+          \xrightarrow{H \otimes I \otimes I \otimes I \otimes I \otimes H}
+          \frac{1}{\sqrt{2}}[\alpha_1 (\frac{\ket{0} + \ket{1}}{\sqrt{2}}) (\ket{00} + \ket{11}) 
+          + \alpha_2 (\frac{\ket{0} - \ket{1}}{\sqrt{2}})(\ket{10} + \ket{01})] \\
+          \otimes \frac{1}{\sqrt{2}}[(\ket{00} + \ket{11}) \omega_1 (\frac{\ket{0} + \ket{1}}{\sqrt{2}})
+          + (\ket{01} + \ket{10}) \omega_2 (\frac{\ket{0} - \ket{1}}{\sqrt{2}})]\\
+          = \frac{1}{2} [\alpha_1 \ket{000} + \alpha_1 \ket{011} + \alpha_1 \ket{100} + \alpha_1 \ket{111}
+          + \alpha_2 \ket{001} + \alpha_2 \ket{010} - \alpha_2 \ket{101} - \alpha_2 \ket{110}]\\
+          \otimes \frac{1}{2}[\omega_1 \ket{000} + \omega_1 \ket{001} + \omega_1 \ket{110} + \omega_1 \ket{111}
+          + \omega_2 \ket{010} - \omega_2 \ket{011} + \omega_2 \ket{100} - \omega_2 \ket{101}]\\
+          = \frac{1}{2}[\ket{00}(\alpha_1 \ket{0} + \alpha_2 \ket{1}) + \ket{01}(\alpha_1 \ket{1} + \alpha_2 \ket{0})
+          + \ket{10}(\alpha_1 \ket{0} - \alpha_2 \ket{1}) + \ket{11}(\alpha_1 \ket{1} - \alpha_2 \ket{0})]\\
+          \otimes \frac{1}{2}[(\omega_1 \ket{0} + \omega_2 \ket{1})\ket{00} 
+          + (\omega_1 \ket{0} - \omega_2 \ket{1})\ket{01}
+          + (\omega_1 \ket{1} + \omega_2 \ket{0})\ket{10} + (\omega_1 \ket{1} - \omega_2 \ket{0})\ket{11}]\\
+          = \frac{1}{2}[\ket{00} \ket{\alpha} + \ket{01} (\text{X} \ket{\alpha}) + \ket{10} (\text{Z} \ket{\alpha})
+          + \ket{11} (\text{XZ} \ket{\alpha})]
+          \otimes \frac{1}{2}[\ket{\omega} \ket{00} + (\text{Z} \ket{\omega}) \ket{01}\\
+          + (\text{X} \ket{\omega}) \ket{10} + (\text{XZ} \ket{\omega}) \ket{11}]\\
+        \end{gather*}
+
+        % TODO
+        % Messurement in Bell Basis
+        % Middle CNOT
+        % Show Gates work
 
     \end{enumerate}
 
