@@ -113,6 +113,8 @@
         clasical bit. Explain how they can do this without any commincation. What if they forget whether
         to messure in the rectilinear or diagonal basis? Can they still share the secret bit?
 
+
+
       % Question 4
       \item Gate teleportation
 
@@ -142,7 +144,7 @@
           \otimes \frac{1}{\sqrt{2}}[(\ket{00} + \ket{11}) \omega_1 (\frac{\ket{0} + \ket{1}}{\sqrt{2}})
           + (\ket{01} + \ket{10}) \omega_2 (\frac{\ket{0} - \ket{1}}{\sqrt{2}})]\\
           = \frac{1}{2} [\alpha_1 \ket{000} + \alpha_1 \ket{011} + \alpha_1 \ket{100} + \alpha_1 \ket{111}
-          + \alpha_2 \ket{001} + \alpha_2 \ket{010} - \alpha_2 \ket{101} - \alpha_2 \ket{110}]\\
+          + \alpha_2 \ket{010} + \alpha_2 \ket{001} - \alpha_2 \ket{110} - \alpha_2 \ket{101}]\\
           \otimes \frac{1}{2}[\omega_1 \ket{000} + \omega_1 \ket{001} + \omega_1 \ket{110} + \omega_1 \ket{111}
           + \omega_2 \ket{010} - \omega_2 \ket{011} + \omega_2 \ket{100} - \omega_2 \ket{101}]\\
           = \frac{1}{2}[\ket{00}(\alpha_1 \ket{0} + \alpha_2 \ket{1}) + \ket{01}(\alpha_1 \ket{1} + \alpha_2 \ket{0})
@@ -152,14 +154,81 @@
           + (\omega_1 \ket{1} + \omega_2 \ket{0})\ket{10} + (\omega_1 \ket{1} - \omega_2 \ket{0})\ket{11}]\\
           = \frac{1}{2}[\ket{00} \ket{\alpha} + \ket{01} (\text{X} \ket{\alpha}) + \ket{10} (\text{Z} \ket{\alpha})
           + \ket{11} (\text{XZ} \ket{\alpha})]
-          \otimes \frac{1}{2}[\ket{\omega} \ket{00} + (\text{Z} \ket{\omega}) \ket{01}\\
-          + (\text{X} \ket{\omega}) \ket{10} + (\text{XZ} \ket{\omega}) \ket{11}]\\
+          \otimes \frac{1}{2}[\ket{\omega} \ket{00} + (\text{X} \ket{\omega}) \ket{01}\\
+          + (\text{Z} \ket{\omega}) \ket{10} + (\text{XZ} \ket{\omega}) \ket{11}]\\
+          = \frac{1}{4}[ % This is fucked :(
+          \ket{00}\ket{\alpha}\ket{\omega}\ket{00} +
+          \ket{00}\ket{\alpha}(\text{X} \ket{\omega})\ket{01} +
+          \ket{00}\ket{\alpha}(\text{Z} \ket{\omega})\ket{10} + \\
+          \ket{00}\ket{\alpha}(\text{XZ} \ket{\omega})\ket{11} +
+          \ket{01}(\text{X}\ket{\alpha})\ket{\omega}\ket{00} +
+          \ket{01}(\text{X}\ket{\alpha})(\text{Z} \ket{\omega})\ket{01} +\\
+          \ket{01}(\text{X}\ket{\alpha})(\text{X} \ket{\omega})\ket{10} +
+          \ket{01}(\text{X}\ket{\alpha})(\text{XZ} \ket{\omega})\ket{11} +
+          \ket{10}(\text{Z}\ket{\alpha})\ket{\omega}\ket{00} +
+          \ket{10}(\text{Z}\ket{\alpha})(\text{Z} \ket{\omega})\ket{01} +\\
+          \ket{10}(\text{Z}\ket{\alpha})(\text{X} \ket{\omega})\ket{10} +
+          \ket{10}(\text{Z}\ket{\alpha})(\text{XZ} \ket{\omega})\ket{11} +
+          \ket{11}(\text{XZ}\ket{\alpha})\ket{\omega}\ket{00} +
+          \ket{11}(\text{XZ}\ket{\alpha})(\text{Z} \ket{\omega})\ket{01} +\\
+          \ket{11}(\text{XZ}\ket{\alpha})(\text{X} \ket{\omega})\ket{10} +
+          \ket{11}(\text{XZ}\ket{\alpha})(\text{XZ} \ket{\omega})\ket{11}
+          ] \\
         \end{gather*}
 
-        % TODO
-        % Messurement in Bell Basis
-        % Middle CNOT
-        % Show Gates work
+        \[
+          \begin{cases}
+          \ket{00}\ket{\alpha}\ket{\omega}\ket{00} & \text{w.p. } \frac{1}{16}\\
+          \ket{00}\ket{\alpha}(\text{Z} \ket{\omega})\ket{01} & \text{w.p. } \frac{1}{16}\\
+          \ket{00}\ket{\alpha}(\text{X} \ket{\omega})\ket{10} & \text{w.p. } \frac{1}{16}\\ 
+          \ket{00}\ket{\alpha}(\text{XZ} \ket{\omega})\ket{11} & \text{w.p. } \frac{1}{16}\\
+          \ket{01}(\text{X}\ket{\alpha})\ket{\omega}\ket{00} & \text{w.p. } \frac{1}{16}\\
+          \ket{01}(\text{X}\ket{\alpha})(\text{Z} \ket{\omega})\ket{01} & \text{w.p. } \frac{1}{16}\\
+          \ket{01}(\text{X}\ket{\alpha})(\text{X} \ket{\omega})\ket{10} & \text{w.p. } \frac{1}{16}\\
+          \ket{01}(\text{X}\ket{\alpha})(\text{XZ} \ket{\omega})\ket{11} & \text{w.p. } \frac{1}{16}\\
+          \ket{10}(\text{Z}\ket{\alpha})\ket{\omega}\ket{00} & \text{w.p. } \frac{1}{16}\\
+          \ket{10}(\text{Z}\ket{\alpha})(\text{Z} \ket{\omega})\ket{01} & \text{w.p. } \frac{1}{16}\\
+          \ket{10}(\text{Z}\ket{\alpha})(\text{X} \ket{\omega})\ket{10} & \text{w.p. } \frac{1}{16}\\
+          \ket{10}(\text{Z}\ket{\alpha})(\text{XZ} \ket{\omega})\ket{11} & \text{w.p. } \frac{1}{16}\\
+          \ket{11}(\text{XZ}\ket{\alpha})\ket{\omega}\ket{00} & \text{w.p. } \frac{1}{16}\\
+          \ket{11}(\text{XZ}\ket{\alpha})(\text{Z} \ket{\omega})\ket{01} & \text{w.p. } \frac{1}{16}\\
+          \ket{11}(\text{XZ}\ket{\alpha})(\text{X} \ket{\omega})\ket{10} & \text{w.p. } \frac{1}{16}\\
+          \ket{11}(\text{XZ}\ket{\alpha})(\text{XZ} \ket{\omega})\ket{11}& \text{w.p. } \frac{1}{16}\\
+          \end{cases}
+        \]
+        
+
+        Now lets take a look at a couple of these cases to confirm or deny that the circuit will teleport the CNOT gate. 
+
+        \begin{gather*}
+          \ket{00}\ket{\alpha}\ket{\omega}\ket{00}\\
+          \text{Just look the middle two qubits for now:}\\
+          \ket{\alpha}\ket{\omega} = (\alpha_1 \ket{0} + \alpha_2 \ket{1})(\omega_1 \ket{0} + \omega_2 \ket{1})
+          = \alpha_1 \omega_1 \ket{00} + \alpha_1 \omega_2 \ket{01} + \alpha_2 \omega_1 \ket{10} 
+          + \alpha_2 \omega_2 \ket{11} \\
+          \xrightarrow{\text{CNOT}} \alpha_1 \omega_1 \ket{00} + \alpha_1 \omega_2 \ket{01}
+          + \alpha_2 \omega_1 \ket{11} + \alpha_2 \omega_2 \ket{10} \\
+          \text{Since the other four qubits were all zero we don't need to apply any gates.}\\
+        \end{gather*}
+
+        \begin{gather*}
+          \ket{10}(\text{Z}\ket{\alpha})(\text{X}\ket{\omega})\ket{10}\\
+          (\text{Z}\ket{\alpha})(\text{X}\ket{\omega}) = (\alpha_1 \ket{0} - \alpha_2 \ket{1})
+          (\omega_1 \ket{1} + \omega_2 \ket{0}) = \alpha_1 \omega_1 \ket{01} + \alpha_1 \omega_2 \ket{00}
+          - \alpha_2 \omega_1 \ket{11} - \alpha_2 \omega_2 \ket{10}\\
+          \xrightarrow{\text{CNOT}} \alpha_1 \omega_1 \ket{01} + \alpha_1 \omega_2 \ket{00}
+          - \alpha_2 \omega_1 \ket{10} - \alpha_2 \omega_2 \ket{11}\\
+          = \alpha_1 \ket{0} (\omega_1 \ket{1} + \omega_2 \ket{0}) 
+          - \alpha_2 \ket{1} (\omega_1\ket{0} + \omega_2 \ket{1})\\
+          \text{We can see that the first qubit will always be Z}\ket{\alpha} \\
+          \text{However, the second qubit could either be X}\ket{\omega} \text{or}\ket{\omega}\\
+          \text{Next we need to apply the gates to each qubit, however, they will be applied incorrectly}\\
+          \xrightarrow{XZ \otimes Z} \text{ZXZ} \ket{\alpha} \otimes (\text{ZX} \ket{\omega} 
+          \text{or } \text{Z} \ket{\omega})\\
+        \end{gather*} 
+        
+        This is not correct, so no the circuit does not perform gate teleportation. In order for the circuit to be correct the control wires for the X and Z gates would need to be switched.
+
 
     \end{enumerate}
 

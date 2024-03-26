@@ -1,0 +1,63 @@
+\documentclass[]{article}
+	
+\usepackage[margin=1in]{geometry}		% For setting margins
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{tikz}
+\usetikzlibrary{quantikz2}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Set up fancy header/footer
+\pagestyle{fancy}
+\fancyhead[LO,L]{Anthony J. Lombardi}
+\fancyhead[CO,C]{CS569: Quantum Info and Computing}
+\fancyhead[RO,R]{\today}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  \section*{Assignment 3}
+    \begin{enumerate}
+      % Question 1
+      \item Finding a hiden parity function:
+        \begin{enumerate}
+          \item Truth table of $f$ and its $\pm$ 1 version: \\ 
+            \begin{table}[h]
+              \centering
+            \begin{tabular}{ll|l|l}
+            $x_1$ & $x_2$ & f & F  \\ \hline
+            0   & 0   & 1 & -1 \\
+            0   & 1   & 0 & 1  \\
+            1   & 0   & 1 & -1 \\
+            1   & 1   & 0 & 1 
+            \end{tabular}
+            \end{table}
+
+          \item Truth table of the Walsh basis function: \\ 
+            \begin{table}[h]
+            \centering
+            \begin{tabular}{l|llll}
+                     & \ket{00} & \ket{01} & \ket{10} & \ket{11} \\ \hline
+            \ket{00} & 1        & 1        & 1        & 1        \\
+            \ket{01} & 1        & -1       & 1        & -1       \\
+            \ket{10} & 1        & 1        & -1       & -1       \\
+            \ket{11} & 1        & -1       & -1       & 1       
+            \end{tabular}
+            \end{table}
+
+          \item F as a linear combination of the Walsh basis functions:
+          \item Complete trace
+          \item The output ...
+        \end{enumerate} 
+
+
+    \end{enumerate}
+
+\end{document} 
