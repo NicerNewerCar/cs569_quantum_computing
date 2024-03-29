@@ -26,7 +26,7 @@
   \section*{Assignment 3}
     \begin{enumerate}
       % Question 1
-      \item Finding a hiden parity function:
+      \item Finding a hidden parity function:
         \begin{enumerate}
           \item Truth table of $f$ and its $\pm$ 1 version: \\ 
             \begin{table}[h]
@@ -54,10 +54,189 @@
 
           \item F as a linear combination of the Walsh basis functions:
           \item Complete trace
-          \item The output ...
+            \begin{gather*}
+              \ket{00} \xrightarrow{H \otimes H} \frac{1}{2}\Sigma_{x \in \{0,1\}^2} \ket{x}
+              \xrightarrow{\hat{U}_f} \frac{1}{2}\Sigma_{x \in \{0,1\}^2} (-1)^{f(x)} \ket{x}\\
+              \xrightarrow{H \otimes H} \frac{1}{4} \Sigma_{y \in \{0,1\}^2} (
+              \Sigma_{x \in \{0,1\}^2} (-1)^{f{x}} (-1)^{y \cdot x}) \ket{y}\\
+              \text{Let } F(x) = (-1)^{f(x)}\\
+              \text{Let } \chi_y(x) = (-1)^{y \cdot x}\\
+              =  \Sigma_{y \in \{0,1\}^2} (\frac{1}{4}
+              \Sigma_{x \in \{0,1\}^2} F(x)\chi_y(x) ) \ket{y}\\
+            \end{gather*}
+
+            We can now use the tables from parts (a) and (b) to solve the equation:
+            \begin{gather*}
+              = [\frac{1}{4}[
+                F(\ket{00})\chi_{\ket{00}(\ket{00})}+
+                F(\ket{01})\chi_{\ket{00}(\ket{01})}+
+                F(\ket{10})\chi_{\ket{00}(\ket{10})}+
+                F(\ket{11})\chi_{\ket{00}(\ket{11})}
+              ]\ket{00}+ \\
+              \frac{1}{4}[
+                F(\ket{00})\chi_{\ket{01}(\ket{00})}+
+                F(\ket{01})\chi_{\ket{01}(\ket{01})}+
+                F(\ket{10})\chi_{\ket{01}(\ket{10})}+
+                F(\ket{11})\chi_{\ket{01}(\ket{11})}
+              ]\ket{01}+\\
+              \frac{1}{4}[
+                F(\ket{00})\chi_{\ket{10}(\ket{00})}+
+                F(\ket{01})\chi_{\ket{10}(\ket{01})}+
+                F(\ket{10})\chi_{\ket{10}(\ket{10})}+
+                F(\ket{11})\chi_{\ket{10}(\ket{11})}             
+              ]\ket{10}+\\
+              \frac{1}{4}[
+                F(\ket{00})\chi_{\ket{11}(\ket{00})}+
+                F(\ket{01})\chi_{\ket{11}(\ket{01})}+
+                F(\ket{10})\chi_{\ket{11}(\ket{10})}+
+                F(\ket{11})\chi_{\ket{11}(\ket{11})}
+              ]\ket{11}] \\
+              = [
+              \frac{1}{4}[-1 \cdot 1 + 1 \cdot 1 + -1 \cdot 1 + 1 \cdot 1]\ket{00}+
+              \frac{1}{4}[-1 \cdot 1 + 1 \cdot -1 + -1 \cdot 1 + 1 \cdot -1]\ket{01}+\\
+              \frac{1}{4}[-1 \cdot 1 + 1 \cdot 1 + -1 \cdot -1 + 1 \cdot -1]\ket{10}+
+              \frac{1}{4}[-1 \cdot 1 + 1 \cdot -1 + -1 \cdot -1 + 1 \cdot 1]\ket{11}] \\
+              = [0 \cdot \ket{00} - 1 \cdot \ket{01} + 0 \cdot \ket{10} + 0 \cdot \ket{11}]
+              = \ket{01}
+            \end{gather*}
+          \item (T/F) The output of the circuit reveals what f is.
+
+            False the output does not reveal what f is.
         \end{enumerate} 
 
+      \pagebreak
+      % Question 2
+      \item Finding a hidden shift:
+        \begin{enumerate}
+          \item Show the truth table f and its $\pm$ version:
+            \begin{table}[h]
+              \centering
+            \begin{tabular}{ll|l|l}
+            $x_1$ & $x_2$ & f & F  \\ \hline
+            0   & 0   & 0 & 1 \\
+            0   & 1   & 1 & -1 \\
+            1   & 0   & 1 & -1 \\
+            1   & 1   & 0 & 1
+            \end{tabular}
+            \end{table}
 
+          \item Complete trace:
+            \begin{gather*}
+              \ket{00} \xrightarrow{H \otimes H} \frac{1}{2}\Sigma_{x \in \{0,1\}^2} \ket{x}
+              \xrightarrow{\hat{U}_f} \frac{1}{2}\Sigma_{x \in \{0,1\}^2} (-1)^{f(x)} \ket{x}\\
+              \xrightarrow{H \otimes H} \frac{1}{4} \Sigma_{y \in \{0,1\}^2} (
+              \Sigma_{x \in \{0,1\}^2} (-1)^{f{x}} (-1)^{y \cdot x}) \ket{y}\\
+              \text{Let } F(x) = (-1)^{f(x)}\\
+              \text{Let } \chi_y(x) = (-1)^{y \cdot x}\\
+              =  \Sigma_{y \in \{0,1\}^2} (\frac{1}{4}
+              \Sigma_{x \in \{0,1\}^2} F(x)\chi_y(x) ) \ket{y}\\
+            \end{gather*}
+
+            We can now use the table from part (a), and our knowledge of $\chi$, to solve the equation:
+            \begin{gather*}
+              = [\frac{1}{4}[
+                F(\ket{00})\chi_{\ket{00}(\ket{00})}+
+                F(\ket{01})\chi_{\ket{00}(\ket{01})}+
+                F(\ket{10})\chi_{\ket{00}(\ket{10})}+
+                F(\ket{11})\chi_{\ket{00}(\ket{11})}
+              ]\ket{00}+ \\
+              \frac{1}{4}[
+                F(\ket{00})\chi_{\ket{01}(\ket{00})}+
+                F(\ket{01})\chi_{\ket{01}(\ket{01})}+
+                F(\ket{10})\chi_{\ket{01}(\ket{10})}+
+                F(\ket{11})\chi_{\ket{01}(\ket{11})}
+              ]\ket{01}+\\
+              \frac{1}{4}[
+                F(\ket{00})\chi_{\ket{10}(\ket{00})}+
+                F(\ket{01})\chi_{\ket{10}(\ket{01})}+
+                F(\ket{10})\chi_{\ket{10}(\ket{10})}+
+                F(\ket{11})\chi_{\ket{10}(\ket{11})}             
+              ]\ket{10}+\\
+              \frac{1}{4}[
+                F(\ket{00})\chi_{\ket{11}(\ket{00})}+
+                F(\ket{01})\chi_{\ket{11}(\ket{01})}+
+                F(\ket{10})\chi_{\ket{11}(\ket{10})}+
+                F(\ket{11})\chi_{\ket{11}(\ket{11})}
+              ]\ket{11}] \\
+              = [
+              \frac{1}{4}[1 \cdot 1 + -1 \cdot 1 + -1 \cdot 1 + 1 \cdot 1] \ket{00} + 
+              \frac{1}{4}[1 \cdot 1 + -1 \cdot -1 + -1 \cdot 1 + 1 \cdot -1] \ket{01} +\\ 
+              \frac{1}{4}[1 \cdot 1 + -1 \cdot 1 + -1 \cdot -1 + 1 \cdot -1] \ket{10} + 
+              \frac{1}{4}[1 \cdot 1 + -1 \cdot -1 + -1 \cdot -1 + 1 \cdot 1] \ket{11}]\\
+              = [0 \cdot \ket{00} + 0 \cdot \ket{01} + 0 \cdot \ket{10} - 1\cdot \ket{11}]
+              = \ket{11}
+            \end{gather*}
+
+          \item The final output of the circuit is $\ket{00}$.
+          \item (T/F) The circuit reveals the hidden string s?
+
+            True the circuit does output the hidden string.
+        \end{enumerate}
+
+      % Question 3
+      \item Quantum Fourier Transform 
+        \begin{enumerate}
+          \item (T/F) The following bit-level QFT derivation for $N = 4$ is correct.
+
+            True the derivation for $N = 4$ is correct.
+
+          \item (T/F) $R_k H \ket{0} = \frac{(\ket{0} + e^{\frac{2\pi i}{2^k}} \ket{1})}{\sqrt{2}}$
+
+            \begin{gather*}
+              R_k H \ket{0} =
+              \begin{pmatrix}
+                1 & 0\\
+                0 & e^{\frac{2\pi i }{2^k}}
+              \end{pmatrix}
+              \begin{pmatrix}
+                \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\
+                \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} 
+              \end{pmatrix}
+              \begin{pmatrix}
+                1\\
+                0
+              \end{pmatrix}\\
+              = \begin{pmatrix}
+                1 \cdot \frac{1}{\sqrt{2}} + 0 \cdot \frac{1}{\sqrt{2}} & 
+                1 \cdot \frac{1}{\sqrt{2}} + 0 \cdot - \frac{1}{\sqrt{2}}\\
+                0 \cdot \frac{1}{\sqrt{2}} + e^{\frac{2 \pi i}{2^k}} \cdot \frac{1}{\sqrt{2}} &
+                0 \cdot \frac{1}{\sqrt{2}} + e^{\frac{2 \pi i}{2^k}} \cdot - \frac{1}{\sqrt{2}}
+              \end{pmatrix} 
+              \begin{pmatrix}
+                1\\
+                0
+              \end{pmatrix}\\
+              = \begin{pmatrix}
+                \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\\
+                \frac{e^{\frac{2 \pi i}{2^k}}}{\sqrt{2}} &  - \frac{e^{\frac{2 \pi i}{2^k}}}{\sqrt{2}}
+              \end{pmatrix}
+              \begin{pmatrix}
+                1\\
+                0
+              \end{pmatrix} = 
+              \begin{pmatrix}
+                \frac{1}{\sqrt{2}} \cdot 1 + \frac{1}{\sqrt{2}} \cdot 0\\
+                \frac{e^{\frac{2 \pi i}{2^k}}}{\sqrt{2}} \cdot 1 + - \frac{e^{\frac{2 \pi i}{2^k}}}{\sqrt{2}} \cdot 0
+              \end{pmatrix} = 
+              \begin{pmatrix}
+                \frac{1}{\sqrt{2}}\\ 
+                \frac{e^{\frac{2 \pi i}{2^k}}}{\sqrt{2}} 
+              \end{pmatrix} \\= 
+              \frac{1}{\sqrt{2}}
+              \begin{pmatrix}
+                1 \\
+                e^{\frac{2 \pi i}{2^k}}
+              \end{pmatrix}
+              = \frac{(\ket{0} + e^{\frac{2\pi i}{2^k}} \ket{1})}{\sqrt{2}}
+            \end{gather*}
+            True. //
+          \item (T/F) The following is a correct QFT circuit for N = 4.
+
+            True, the circuit is correct because $N = 4 = 2^2$ so $n=2$. Where (starting from the bottom wire) the 
+            pattern of gates is as follows $H \Sigma_{i = 2}^n R_i$ for all lines $\ket{j_n} \dots \ket{j_1}$. Then
+            for line $\ket{j_0}$ just the Hadamard gate is applied.
+        \end{enumerate}
     \end{enumerate}
 
 \end{document} 
+
