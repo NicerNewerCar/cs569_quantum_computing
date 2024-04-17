@@ -1,0 +1,362 @@
+\documentclass[]{article}
+	
+\usepackage[margin=1in]{geometry}		% For setting margins
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{tikz}
+\usetikzlibrary{quantikz2}
+\usepackage{braket}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Set up fancy header/footer
+\pagestyle{fancy}
+\fancyhead[LO,L]{Anthony J. Lombardi}
+\fancyhead[CO,C]{CS569: Quantum Info and Computing}
+\fancyhead[RO,R]{\today}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  \section*{Assignment 4}
+    \begin{enumerate}
+      \item Spectral Decomposition
+
+      \begin{enumerate}
+        \item Spectral decompositions of the obserables X, Z, Y 
+
+          Calculate the eigenvalues of X:
+          \begin{gather*}
+            det(\lambda I - X)=
+            det(
+            \begin{bmatrix}
+              \lambda & 0 \\
+              0 & \lambda 
+            \end{bmatrix}
+            - \begin{bmatrix}
+              0 & 1 \\
+              1 & 0
+            \end{bmatrix}
+            ) = det (
+            \begin{bmatrix}
+              \lambda & -1\\
+              -1 & \lambda
+            \end{bmatrix} 
+            )\\
+            \lambda^2 -1 = 0\\
+            \lambda_1 = 1, \lambda_2 = -1
+          \end{gather*}
+
+          Calculate the eigenvectors of X:
+
+          \noindent\begin{minipage}{.49\linewidth}
+            \begin{gather*}
+              (X - \lambda_1 I) \cdot \vec{\lambda_1} = 0\\
+              \begin{bmatrix}
+                -1 & 1\\
+                1 & -1
+              \end{bmatrix}
+              \cdot 
+              \begin{bmatrix}
+                x\\ y
+              \end{bmatrix}
+              = \begin{bmatrix}
+                0\\0
+              \end{bmatrix}\\
+              -x+y=0\\
+              x-y=0\\
+              x = 1, y = 1\\
+              \ket{\lambda_1} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+                1\\1
+              \end{bmatrix}
+            \end{gather*}
+          \end{minipage}
+          \begin{minipage}{.49\linewidth}
+            \begin{gather*}
+              (X - \lambda_2 I) \cdot \vec{\lambda_2} = 0\\
+              \begin{bmatrix}
+                1 & 1\\
+                1 & 1
+              \end{bmatrix}
+              \cdot 
+              \begin{bmatrix}
+                x\\ y
+              \end{bmatrix}
+              = \begin{bmatrix}
+                0\\0
+              \end{bmatrix}\\
+              x+y=0\\
+              x+y=0\\
+              x = 1, y = -1\\
+              \ket{\lambda_2} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+                1\\-1
+              \end{bmatrix}
+            \end{gather*}
+          \end{minipage}
+
+          Spectral decomposition of X
+          \begin{gather*}
+            X = \sum_{i=1}^{2} \lambda_i \ket{\lambda_i}\bra{\lambda_i}
+            = \lambda_1 \ket{\lambda_1}\bra{\lambda_1} + \lambda_2 \ket{\lambda_2}\bra{\lambda_2}\\
+            = (+1) \frac{1}{\sqrt{2}} \begin{bmatrix}1\\1\end{bmatrix}
+            \frac{1}{\sqrt{2}} \begin{bmatrix}1&1\end{bmatrix}
+            + (-1) \frac{1}{\sqrt{2}} \begin{bmatrix}1\\-1\end{bmatrix}
+            \frac{1}{\sqrt{2}} \begin{bmatrix}1&-1\end{bmatrix}\\
+            = (+1) \frac{1}{2} \begin{bmatrix}1&1\\1&1\end{bmatrix} 
+            + (-1) \frac{1}{2} \begin{bmatrix}1&-1\\-1&1\end{bmatrix}
+          \end{gather*}
+
+          Calculate the eigen values of Z:
+          \begin{gather*}
+            det(\lambda I - Z) = det(
+            \begin{bmatrix}
+              \lambda & 0\\
+              0 & \lambda
+            \end{bmatrix}
+            - 
+            \begin{bmatrix}
+              1 & 0\\
+              0 & -1
+            \end{bmatrix}
+            ) = 
+            det (
+            \begin{bmatrix}
+              \lambda - 1 & 0\\
+              0 & \lambda + 1
+            \end{bmatrix}
+            )\\
+            (\lambda - 1) (\lambda + 1) = 0\\
+            \lambda_1 = 1, \lambda_2 = -1
+          \end{gather*}
+
+
+          \noindent\begin{minipage}{.49\linewidth}
+            \begin{gather*}
+              (Z - \lambda_1 I) \cdot \vec{\lambda_1} = 0\\
+              \begin{bmatrix}
+                0 & 0\\
+                0 & -2
+              \end{bmatrix}
+              \cdot 
+              \begin{bmatrix}
+                x\\ y
+              \end{bmatrix}
+              = \begin{bmatrix}
+                0\\0
+              \end{bmatrix}\\
+              \text{Apply Gaussian elimination}\\
+              \begin{bmatrix}
+                0 & 1\\
+                0 & 0
+              \end{bmatrix}
+              \cdot 
+              \begin{bmatrix}
+                y\\ x
+              \end{bmatrix}
+              = \begin{bmatrix}
+                0\\0
+              \end{bmatrix}\\
+              y = 0, x = 1\\
+              \ket{\lambda_1} = \begin{bmatrix}
+                1\\0
+              \end{bmatrix}
+            \end{gather*}
+          \end{minipage}
+          \begin{minipage}{.49\linewidth}
+            \begin{gather*}
+              (Z - \lambda_2 I) \cdot \vec{\lambda_2} = 0\\
+              \begin{bmatrix}
+                2 & 0\\
+                0 & 0
+              \end{bmatrix}
+              \cdot 
+              \begin{bmatrix}
+                x\\ y
+              \end{bmatrix}
+              = \begin{bmatrix}
+                0\\0
+              \end{bmatrix}\\
+              \text{Apply Gaussian elimination}\\
+              \begin{bmatrix}
+                1 & 0\\
+                0 & 0
+              \end{bmatrix}
+              \cdot 
+              \begin{bmatrix}
+                x\\ y
+              \end{bmatrix}
+              = \begin{bmatrix}
+                0\\0
+              \end{bmatrix}\\
+              x = 0, y = 1\\
+              \ket{\lambda_2} = \begin{bmatrix}
+                0\\1
+              \end{bmatrix}
+            \end{gather*}
+          \end{minipage}
+
+          Spectral decomposition of Z
+          \begin{gather*}
+            Z = \sum_{i=1}^{2} \lambda_i \ket{\lambda_i}\bra{\lambda_i}
+            = \lambda_1 \ket{\lambda_1}\bra{\lambda_1} + \lambda_2 \ket{\lambda_2}\bra{\lambda_2}\\
+            = (+1) \begin{bmatrix}1\\0\end{bmatrix} \begin{bmatrix}1&0\end{bmatrix}
+            + (-1) \begin{bmatrix}0\\1\end{bmatrix} \begin{bmatrix}0&1\end{bmatrix}\\
+            = (+1) \begin{bmatrix}1&0\\0&0\end{bmatrix} + (-1) \begin{bmatrix}0&0\\0&1\end{bmatrix}
+          \end{gather*}
+
+          Calculate the eigenvalues of Y
+          \begin{gather*}
+            det(\lambda I - Y) = det(
+            \begin{bmatrix}
+              \lambda & 0\\
+              0 & \lambda
+            \end{bmatrix}
+            - 
+            \begin{bmatrix}
+              0 & -i\\
+              i & 0
+            \end{bmatrix}
+            ) = 
+            det (
+            \begin{bmatrix}
+              \lambda & i\\
+              -i & \lambda 
+            \end{bmatrix}
+            )\\
+            \lambda^2 - (-i*i) = 0\\
+            \lambda^2 - 1 = 0\\
+            \lambda_1 = 1, \lambda_2 = -1
+          \end{gather*}
+
+          \noindent\begin{minipage}{.49\linewidth}
+            \begin{gather*}
+              (Y - \lambda_1 I) \cdot \vec{\lambda_1} = 0\\
+              \begin{bmatrix}
+                -1 & -i\\
+                i & -1
+              \end{bmatrix}
+              \cdot 
+              \begin{bmatrix}
+                x\\ y
+              \end{bmatrix}
+              = \begin{bmatrix}
+                0\\0
+              \end{bmatrix}\\
+              \text{Apply Gaussian elimination}\\
+              \begin{bmatrix}
+                1 & i\\
+                0 & 0
+              \end{bmatrix}
+              \cdot 
+              \begin{bmatrix}
+                x\\ y
+              \end{bmatrix}
+              = \begin{bmatrix}
+                0\\0
+              \end{bmatrix}\\
+              x = -i, y = 1\\
+              \ket{\lambda_1} = \frac{1}{\sqrt{2}} \begin{bmatrix}
+                -i\\1
+              \end{bmatrix}
+            \end{gather*}
+          \end{minipage}
+          \begin{minipage}{.45\linewidth}
+            \begin{gather*}
+              (Y - \lambda_2 I) \cdot \vec{\lambda_2} = 0\\
+              \begin{bmatrix}
+                1 & -i\\
+                i & 1
+              \end{bmatrix}
+              \cdot 
+              \begin{bmatrix}
+                x\\ y
+              \end{bmatrix}
+              = \begin{bmatrix}
+                0\\0
+              \end{bmatrix}\\
+              \text{Apply Gaussian elimination}\\
+              \begin{bmatrix}
+                1 & -i\\
+                0 & 0
+              \end{bmatrix}
+              \cdot 
+              \begin{bmatrix}
+                x\\ y
+              \end{bmatrix}
+              = \begin{bmatrix}
+                0\\0
+              \end{bmatrix}\\
+              x = i, y = 1\\
+              \ket{\lambda_2} = \frac{1}{\sqrt{2}} \begin{bmatrix}
+                i\\1
+              \end{bmatrix}
+            \end{gather*}
+          \end{minipage}
+
+          Spectral decomposition of Y
+          \begin{gather*}
+            Y = \sum_{i=1}^{2} \lambda_i \ket{\lambda_i}\bra{\lambda_i}
+            = \lambda_1 \ket{\lambda_1}\bra{\lambda_1} + \lambda_2 \ket{\lambda_2}\bra{\lambda_2}\\
+            = (+1) \frac{1}{\sqrt{2}} \begin{bmatrix}-i\\1\end{bmatrix}
+            \frac{1}{\sqrt{2}} \begin{bmatrix}-i&1\end{bmatrix}
+            + (-1) \frac{1}{\sqrt{2}} \begin{bmatrix}i\\1\end{bmatrix}
+            \frac{1}{\sqrt{2}} \begin{bmatrix}i&1\end{bmatrix}\\
+            = (+1) \frac{1}{2} \begin{bmatrix}-1&-i\\-i&1\end{bmatrix} 
+            + (-1) \frac{1}{2}\begin{bmatrix}-1&i\\i&1\end{bmatrix}
+          \end{gather*}
+
+        \item Show that $\braket{\psi|P_r|\psi} \ge 0$ and moreover, $\sum_r \braket{\psi|P_r|\psi} = 1$
+
+        \item Compute $\braket{X}$ and  $\braket{Z}$ under $\ket{+}$
+
+        Compute $\braket{X}$ under $\ket{+}$
+
+        \begin{gather*}
+          \braket{X}_{\ket{+}} = \braket{+|X|+} = \braket{+|(\ket{+}\bra{+} - \ket{-}\bra{-})|+}\\
+          = \braket{+|+}\braket{+|+} - \braket{+|-}\braket{-|+}\\
+          = 1 * 1 - 0 * 0 = 1
+        \end{gather*}
+
+        Compute $\braket{Z}$ under $\ket{+}$
+
+        \begin{gather*}
+          \braket{Z}_{\ket{+}} = \braket{+|Z|+} = \braket{+|(\ket{0}\bra{0} - \ket{1}\bra{1})|+}\\
+          = \braket{+|0}\braket{0|+} - \braket{+|1}\braket{1|+}\\
+          = (\frac{1}{\sqrt{2}} * \frac{1}{\sqrt{2}}) - (\frac{1}{\sqrt{2}} * \frac{1}{\sqrt{2}})
+          = \frac{1}{2} - \frac{1}{2} = 0
+        \end{gather*}
+
+
+        \item Compute $\braket{X_1Z_2}$ under $\ket{\beta_{00}}$
+          \begin{gather*}
+            \braket{X_1Z_2}_{\ket{\beta_{00}}} = \braket{\beta_{00}|X_1Z_2|\beta_{00}} = 
+            \frac{\bra{00}+\bra{11}}{\sqrt{2}} (X_1 \otimes Z_2) \frac{\ket{00}+\ket{11}}{\sqrt{2}} \\ 
+            = [\braket{0|X_1|0} + \braket{0|X_1|1} + \braket{1|X_1|0} + \braket{1|X_1|1}] \otimes
+            [\braket{0|Z_2|0} + \braket{0|Z_2|1} + \braket{1|Z_2|0} + \braket{1|Z_2|1}] \\
+            = [\braket{0|(\ket{+}\bra{+} - \ket{-}\bra{-})|0} + \braket{0|(\ket{+}\bra{+} - \ket{-}\bra{-})|1}\\
+            + \braket{1|(\ket{+}\bra{+} - \ket{-}\bra{-})|0} + \braket{1|(\ket{+}\bra{+} - \ket{-}\bra{-})|1}]\\ 
+            \otimes \\
+            [\braket{0|(\ket{0}\bra{0} - \ket{1}\bra{1})|0} + \braket{0|(\ket{0}\bra{0} - \ket{1}\bra{1})|1} \\
+            + \braket{1|(\ket{0}\bra{0} - \ket{1}\bra{1})|0} + \braket{1|(\ket{0}\bra{0} - \ket{1}\bra{1})|1}] \\
+            = [\braket{0|+}\braket{+|0} - \braket{0|-}\braket{-|0} + 
+            \braket{0|+}\braket{+|1} - \braket{0|-}\braket{-|1}\\
+            + \braket{1|+}\braket{+|0} - \braket{1|-}\braket{-|0} +
+            \braket{1|+}\braket{+|1} - \braket{1|-}\braket{-|1}]\\ \otimes\\
+            [\braket{0|0}\braket{0|0} - \braket{0|1}\braket{1|0} + \braket{0|0}\braket{0|1} - \braket{0|1}\braket{1|1}\\
+            + \braket{1|0}\braket{0|0} - \braket{1|1}\braket{1|0} + \braket{1|0}\braket{0|1} - \braket{1|1}\braket{1|1}]\\
+            = [\frac{1}{2} - \frac{1}{2} + \frac{1}{2} - \frac{1}{2} + \frac{1}{2} - \frac{1}{2} + \frac{1}{2} - \frac{1}{2}] \otimes [1-0+0-0+0-0+0-1] = 0
+          \end{gather*}
+
+
+      \end{enumerate}
+    \item CHSH Game
+    \end{enumerate}
+
+\end{document} 
+
