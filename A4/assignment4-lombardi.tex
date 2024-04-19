@@ -335,28 +335,76 @@
 
         \item Compute $\braket{X_1Z_2}$ under $\ket{\beta_{00}}$
           \begin{gather*}
-            \braket{X_1Z_2}_{\ket{\beta_{00}}} = \braket{\beta_{00}|X_1Z_2|\beta_{00}} = 
-            \frac{\bra{00}+\bra{11}}{\sqrt{2}} (X_1 \otimes Z_2) \frac{\ket{00}+\ket{11}}{\sqrt{2}} \\ 
-            = [\braket{0|X_1|0} + \braket{0|X_1|1} + \braket{1|X_1|0} + \braket{1|X_1|1}] \otimes
-            [\braket{0|Z_2|0} + \braket{0|Z_2|1} + \braket{1|Z_2|0} + \braket{1|Z_2|1}] \\
-            = [\braket{0|(\ket{+}\bra{+} - \ket{-}\bra{-})|0} + \braket{0|(\ket{+}\bra{+} - \ket{-}\bra{-})|1}\\
-            + \braket{1|(\ket{+}\bra{+} - \ket{-}\bra{-})|0} + \braket{1|(\ket{+}\bra{+} - \ket{-}\bra{-})|1}]\\ 
-            \otimes \\
-            [\braket{0|(\ket{0}\bra{0} - \ket{1}\bra{1})|0} + \braket{0|(\ket{0}\bra{0} - \ket{1}\bra{1})|1} \\
-            + \braket{1|(\ket{0}\bra{0} - \ket{1}\bra{1})|0} + \braket{1|(\ket{0}\bra{0} - \ket{1}\bra{1})|1}] \\
-            = [\braket{0|+}\braket{+|0} - \braket{0|-}\braket{-|0} + 
-            \braket{0|+}\braket{+|1} - \braket{0|-}\braket{-|1}\\
-            + \braket{1|+}\braket{+|0} - \braket{1|-}\braket{-|0} +
-            \braket{1|+}\braket{+|1} - \braket{1|-}\braket{-|1}]\\ \otimes\\
-            [\braket{0|0}\braket{0|0} - \braket{0|1}\braket{1|0} + \braket{0|0}\braket{0|1} - \braket{0|1}\braket{1|1}\\
-            + \braket{1|0}\braket{0|0} - \braket{1|1}\braket{1|0} + \braket{1|0}\braket{0|1} - \braket{1|1}\braket{1|1}]\\
-            = [\frac{1}{2} - \frac{1}{2} + \frac{1}{2} - \frac{1}{2} + \frac{1}{2} - \frac{1}{2} + \frac{1}{2} - \frac{1}{2}] \otimes [1-0+0-0+0-0+0-1] = 0
+            \braket{X_1 Z_2}_{\ket{\beta_{00}}} = \frac{1}{2}[\bra{00} + \bra{11}(X_1 Z_2) \ket{00} + \ket{11}]\\
+            = \frac{1}{2}[\braket{00|X_1 Z_2|00} + \braket{00|X_1 Z_2|11}
+            + \braket{11|X_1 Z_2|00} + \braket{1|X_1 Z_2|11}]\\
+            = \frac{1}{2}[0*1 + 1*0 + 1*0 + 0*-1] = 0
           \end{gather*}
-
-
       \end{enumerate}
     \item CHSH Game
-    \end{enumerate}
 
+      \begin{enumerate}
+        \item (T/F)$\braket{\mathcal O}$ holds
+        \item (T/F) $\braket{QS}$ = $\frac{1}{\sqrt{2}}$.
+          \begin{gather*}
+            QS = Z_1 \otimes \frac{-1}{\sqrt{2}}(Z_2 + X_2) = \frac{-1}{\sqrt{2}}(Z_1 Z_2 + Z_1 X_2)\\
+            \braket{QS}_{\ket{\beta_{11}}} = \braket{\beta_{11} | QS | \beta_{11}}
+            = \frac{\bra{01} - \bra{10}}{\sqrt{2}}[\frac{-1}{\sqrt{2}}(Z_1 Z_2 + Z_1 X_2)]
+            \frac{\ket{01} - \ket{10}}{\sqrt{2}}\\
+            = \frac{-1}{2\sqrt{2}}[(\bra{01} - \bra{10})Z_1 Z_2(\ket{01} - \bra{10}) + 
+            (\bra{01} - \bra{10})Z_1 X_2(\ket{01} - \bra{10})]\\
+            = \frac{-1}{2\sqrt{2}}[
+            \braket{01|Z_1 Z_2|01} - \braket{01|Z_1 Z_2|10} - \braket{10|Z_1 Z_2|01} + \braket{10|Z_1 Z_2|10}\\
+            + \braket{01|Z_1 X_2|01} - \braket{01|Z_1 X_2|10} - \braket{10|Z_1 X_2|01} + \braket{10|Z_1 X_2|10}]\\
+            = \frac{-1}{2\sqrt{2}}[-1 -0 -0 + (-1) + 0-0-0+0] = \frac{-1}{2\sqrt{2}}*-2 = \frac{1}{\sqrt{2}}
+          \end{gather*}
+          
+          True.
+        \item (T/F) $\braket{RS}$ = $\frac{1}{\sqrt{2}}$.
+          \begin{gather*}
+            RS = X_1 \otimes \frac{-1}{\sqrt{2}}(Z_2 + X_2) = \frac{-1}{\sqrt{2}}(X_1 Z_2 + X_1 X_2)\\
+            \braket{RS}_{\ket{\beta_{11}}} = \braket{\beta_{11} | RS | \beta_{11}}
+            = \frac{\bra{01} - \bra{10}}{\sqrt{2}}[\frac{-1}{\sqrt{2}}(X_1 Z_2 + X_1 X_2)]
+            \frac{\ket{01} - \ket{10}}{\sqrt{2}}\\
+            = \frac{-1}{2\sqrt{2}}[(\bra{01} - \bra{10})X_1 Z_2(\ket{01} - \bra{10}) + 
+            (\bra{01} - \bra{10})X_1 X_2(\ket{01} - \bra{10})]\\
+            = \frac{-1}{2\sqrt{2}}[
+            \braket{01|X_1 Z_2|01} - \braket{01|X_1 Z_2|10} - \braket{10|X_1 Z_2|01} + \braket{10|X_1 Z_2|10}\\
+            + \braket{01|X_1 X_2|01} - \braket{01|X_1 X_2|10} - \braket{10|X_1 X_2|01} + \braket{10|X_1 X_2|10}]\\
+            = \frac{-1}{2\sqrt{2}}[0-0-0+0 + 0 - 1 -1 +0] = \frac{-1}{2\sqrt{2}}*-2 = \frac{1}{\sqrt{2}}
+          \end{gather*}
+
+          True.
+        \item (T/F) $\braket{RT}$ = $\frac{1}{\sqrt{2}}$.
+          \begin{gather*}
+            RT = X_1 \otimes \frac{1}{\sqrt{2}}(Z_2 - X_2) = \frac{1}{\sqrt{2}}(X_1 Z_2 - X_1 X_2)\\
+            \braket{RT}_{\ket{\beta_{11}}}
+            = \frac{1}{2\sqrt{2}}[(\bra{01} - \bra{10})X_1 Z_2(\ket{01}-\ket{10})
+            - (\bra{01} - \bra{10})X_1 X_2(\ket{01}-\ket{10})]\\
+            \text{From parts b and d we know that} \braket{X_1Z_2}_{\ket{\beta_{11}}} = 0 
+            \text{ and that} \braket{X_1X_2}_{\ket{\beta_{11}}} = -2 \text{.}\\
+            = \frac{1}{2\sqrt{2}}[0 - (-2)] = \frac{1}{2\sqrt{2}} * 2 = \frac{1}{\sqrt{2}} 
+          \end{gather*}
+
+          True.
+        \item (T/F) $\braket{QT}$ = $-\frac{1}{\sqrt{2}}$.
+          \begin{gather*}
+            QT = Z_1 \otimes \frac{1}{\sqrt{2}}(Z_2 - X_2) = \frac{1}{\sqrt{2}}(Z_1 Z_2 - Z_1 X_2)\\
+            \braket{QT}_{\ket{\beta_{11}}}
+            = \frac{1}{2\sqrt{2}}[(\bra{01} - \bra{10})Z_1 Z_2(\ket{01}-\ket{10})
+            - (\bra{01} - \bra{10})Z_1 X_2(\ket{01}-\ket{10})]\\
+            \text{From parts b and d we know that} \braket{Z_1Z_2}_{\ket{\beta_{11}}} = -2 
+            \text{ and that} \braket{Z_1X_2}_{\ket{\beta_{11}}} = 0 \text{.}\\
+            = \frac{1}{2\sqrt{2}}[(-2) - 0] = \frac{1}{2\sqrt{2}} * -2 = \frac{-1}{\sqrt{2}} 
+          \end{gather*}
+
+          True.
+        \item (T/F) If Q, R, S, T are random variables with $\pm$ 1 values then 
+
+          $\mathbb{E}$[QS] + $\mathbb{E}$[RS] + $\mathbb{E}$[RT] - $\mathbb{E}$[QT] $\le$ 2
+
+        \item (T/F) $\braket{\mathcal O} = 2\sqrt{2}$ (Does this mean Quantum 1, Einstein 0?)
+      \end{enumerate}
+    \end{enumerate}
 \end{document} 
 
