@@ -313,6 +313,26 @@
 
         \item Show that $\braket{\psi|P_r|\psi} \ge 0$ and moreover, $\sum_r \braket{\psi|P_r|\psi} = 1$
 
+          We know that $P^2 = P$ for any projector P. We know that $P^{\intercal}$ = P.
+          We also know that the inner product of any normalized state is 1. Since 
+          
+          \begin{gather*}
+            \ket{\psi} = \alpha\ket{0} + \beta\ket{1}\\
+            \braket{\psi|\psi} = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}
+            \begin{pmatrix} \alpha & \beta \end{pmatrix}
+            = |\alpha|^2 + |\beta|^2 = 1
+          \end{gather*}
+
+          So we can say that
+          \begin{gather*}
+            \braket{\psi | P_r | \psi} = \braket{\psi | P_r^{\intercal} P_r | \psi}
+            = (\bra{\psi}P_r^{\intercal})(P_r \ket{\psi}) = \braket{\phi | \phi} \ge 0\\
+            \therefore \sum_r \braket{\psi | P_r | \psi} = \braket{\psi | \sum_r P_r | \psi}
+            = \braket{\psi | I | \psi} = \braket{\psi | \psi}= 1
+          \end{gather*}
+
+          
+
         \item Compute $\braket{X}$ and  $\braket{Z}$ under $\ket{+}$
 
         Compute $\braket{X}$ under $\ket{+}$
@@ -344,7 +364,7 @@
     \item CHSH Game
 
       \begin{enumerate}
-        \item (T/F)$\braket{\mathcal O}$ holds
+        \item (T/F)$\braket{\mathcal O}$ holds. True.
         \item (T/F) $\braket{QS}$ = $\frac{1}{\sqrt{2}}$.
           \begin{gather*}
             QS = Z_1 \otimes \frac{-1}{\sqrt{2}}(Z_2 + X_2) = \frac{-1}{\sqrt{2}}(Z_1 Z_2 + Z_1 X_2)\\
@@ -401,9 +421,24 @@
           True.
         \item (T/F) If Q, R, S, T are random variables with $\pm$ 1 values then 
 
-          $\mathbb{E}$[QS] + $\mathbb{E}$[RS] + $\mathbb{E}$[RT] - $\mathbb{E}$[QT] $\le$ 2
+          \noindent$\mathbb{E}$[QS] + $\mathbb{E}$[RS] + $\mathbb{E}$[RT] - $\mathbb{E}$[QT] $\le$ 2.
+
+          \begin{gather*}
+            QS + RS + RT - QT\\
+            (Q+R)S + (R-Q)T
+          \end{gather*}
+            Either Q+R or R-Q evaluates to zero, then the other term must evaluate to $\pm$ 2.
+            Then the whole expression must evaluate to $\pm$ 2. $\therefore$ True, the expression evaluates to $\le$ 2.
 
         \item (T/F) $\braket{\mathcal O} = 2\sqrt{2}$ (Does this mean Quantum 1, Einstein 0?)
+          \begin{gather*}
+            \braket{\mathcal O} = \braket{QS} + \braket{RS} + \braket{RT} - \braket{QT}\\
+            = \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}} - \frac{-1}{\sqrt{2}} = \frac{4}{\sqrt{2}}
+            = 2\sqrt{2}
+          \end{gather*}
+
+          True, this does mean Quantum 1, Einstein 0, since we were able to calculate a value that is $>$ 2 
+          using the quantum states.
       \end{enumerate}
     \end{enumerate}
 \end{document} 
