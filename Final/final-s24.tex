@@ -1,0 +1,306 @@
+\documentclass{article}
+\usepackage{fullpage}
+\usepackage[usenames]{color}
+\usepackage{times}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{quantikz2}
+
+\newcommand{\ignore}[1]{}
+\renewcommand{\ket}[1]{| #1 \rangle}
+\renewcommand{\bra}[1]{\langle #1 |}
+\newcommand{\ketbra}[2]{| #1 \rangle \langle #2 |}
+\newcommand{\avg}[1]{\langle #1 \rangle}
+
+\begin{document}
+
+Anthony Lombardi
+
+\par\noindent{\bf CS469/569 Quantum Information and Computation. Final Exam (Spring 2024)}
+\par\noindent{\em Submitted work must be your own. Please prepare your solution in TeX using quantikz.}
+
+The {\em stabilizers} of a $5$-qubit quantum error correction are given by
+\[
+	M_1 = Z_2 X_3 X_4 Z_5,
+	\ \
+	M_2 = Z_3 X_4 X_5 Z_1,
+	\ \
+	M_3 = Z_4 X_5 X_1 Z_2,
+	\ \
+	M_4 = Z_5 X_1 X_2 Z_3. 
+\]
+The {\em encodings} of the basis states $\ket{0}$ and $\ket{1}$ are defined by
+\[
+	\ket{\overline{0}} := \frac{(I + M_1)}{\sqrt{2}} \frac{(I+M_2)}{\sqrt{2}} \frac{(I+M_3)}{\sqrt{2}} \frac{(I+M_4)}{\sqrt{2}} \ket{00000},
+	\ \
+	\ket{\overline{1}} := \frac{(I + M_1)}{\sqrt{2}} \frac{(I+M_2)}{\sqrt{2}} \frac{(I+M_3)}{\sqrt{2}} \frac{(I+M_4)}{\sqrt{2}} \ket{11111}. 
+\]
+By linearity, the qubit $\ket{\psi}=a\ket{0}+b\ket{1}$ is encoded as $\ket{\overline{\psi}}=a\ket{\overline{0}}+b\ket{\overline{1}}$.
+
+\begin{enumerate}
+\item (T/F) The stabilizers {\em commute} with each other: $M_j M_k = M_k M_j$, for $j,k=1,2,3,4$.
+
+  \begin{gather*}
+    M_0 \text{ and } M_1 \text{ commute}\\
+    M_0 = I \otimes Z \otimes X \otimes X \otimes Z\\
+    M_1 = Z \otimes I \otimes Z \otimes X \otimes X\\
+    M_0 * M_1 = +1 * +1 * -1 * +1 * -1 = +1
+  \end{gather*}
+
+  \begin{gather*}
+    M_0 \text{ and } M_2 \text{ commute}\\
+    M_0 = I \otimes Z \otimes X \otimes X \otimes Z\\
+    M_2 = X \otimes Z \otimes I \otimes Z \otimes X\\
+    M_0 * M_2 = +1 * +1 * +1 * -1 * -1 = 1
+  \end{gather*}
+
+  \begin{gather*}
+    M_0 \text{ and } M_3 \text{ commute}\\
+    M_0 = I \otimes Z \otimes X \otimes X \otimes Z\\
+    M_3 = X \otimes X \otimes Z \otimes I \otimes Z\\
+    M_0 * M_3 = +1 * -1 * -1 * +1 * +1 = +1
+  \end{gather*}
+
+  \begin{gather*}
+    M_1 \text{ and } M_2 \text{ commute}\\
+    M_1 = Z \otimes I \otimes Z \otimes X \otimes X\\
+    M_2 = X \otimes Z \otimes I \otimes Z \otimes X\\
+    M_1 * M_2 = -1 * +1 * +1 * -1 * +1 = +1
+  \end{gather*}
+
+  \begin{gather*}
+    M_1 \text{ and } M_3 \text{ commute}\\
+    M_1 = Z \otimes I \otimes Z \otimes X \otimes X\\
+    M_3 = X \otimes X \otimes Z \otimes I \otimes Z\\
+    M_1 * M_3 = -1 * +1 * +1 * +1 * -1 = +1
+  \end{gather*}
+
+  \begin{gather*}
+    M_2 \text{ and } M_3 \text{ commute}\\
+    M_2 = X \otimes Z \otimes I \otimes Z \otimes X\\
+    M_3 = X \otimes X \otimes Z \otimes I \otimes Z\\
+    M_2 * M_3 = +1 * -1 * +1 * +1 * -1 = +1
+  \end{gather*}
+
+  True, all of the stabilizers commute with eachother.
+
+\item (T/F) $(I+M_k)^2 = 2(I+M_k)$ and $M_k(I+M_k) = I+M_k$ for $k=1,2,3,4$.
+
+  \begin{gather*}
+    (I + M_k)^2 = (I + M_k)(I + M_k) = I^2 + I*M_k + M_k*I + M_k^2\\
+    = I + M_k + M_k + I = 2I + 2M_k = 2(I+M_k)
+  \end{gather*}
+
+  \begin{gather*}
+    M_k(I+M_k) = M_k * I + M_k^2 = M_k + I = I + M_k
+  \end{gather*}
+
+  True
+
+\item (T/F) $\ket{\overline{0}}$ and $\ket{\overline{1}}$ are {\em $+1$-eigenvectors} of the stabilizers:
+	$M_k\ket{\overline{0}} = \ket{\overline{0}}$ and $M_k\ket{\overline{1}} = \ket{\overline{1}}$.
+	So, any encoded state $\ket{\overline{\psi}}$ is a joint $(+1)$-eigenvector of the stabilizers.
+
+  Since we know that 
+  \begin{gather*}
+    \ket{\overline{0}} := \frac{(I + M_1)}{\sqrt{2}} \frac{(I+M_2)}{\sqrt{2}} \frac{(I+M_3)}{\sqrt{2}} \frac{(I+M_4)}{\sqrt{2}} \ket{00000}\\
+    = \frac{1}{4}(I + M_1)(I + M_2)(I + M_3)(I + M_4)\ket{00000}
+  \end{gather*}
+
+  We can say that for any k = 1,2,3,4 $M_k\ket{\overline{0}} = \ket{\overline{0}}$. For example $M_1$
+  \begin{gather*}
+    M_1\ket{\overline{0}} = M_1 \frac{1}{4}(I + M_1)(I + M_2)(I + M_3)(I + M_4)\ket{00000}\\
+    = \frac{1}{4}M_1(I + M_1)(I + M_2)(I + M_3)(I + M_4)\ket{00000}
+    = \frac{1}{4}(M_1 + M_1^2)(I + M_2)(I + M_3)(I + M_4)\ket{00000}\\
+    = \frac{1}{4}(M_1 + I)(I + M_2)(I + M_3)(I + M_4)\ket{00000} = \ket{\overline{0}}
+  \end{gather*}
+
+  Similarly, we can say that for any k = 1,2,3,4 $M_k\ket{\overline{1}} = \ket{\overline{1}}$. For example $M_3$
+
+  \begin{gather*}
+    M_3\ket{\overline{1}} = M_3 \frac{1}{4}(I + M_1)(I + M_2)(I + M_3)(I + M_4)\ket{11111}\\
+    = \frac{1}{4}(I + M_1)(I + M_2)M_3(I + M_3)(I + M_4)\ket{11111}
+    = \frac{1}{4}(I + M_1)(I + M_2)(M_3 + M_3^2)(I + M_4)\ket{11111}\\
+    = \frac{1}{4}(I + M_1)(I + M_2)(M_3 + I)(I + M_4)\ket{11111} = \ket{\overline{1}}
+  \end{gather*}
+
+  True, since $\ket{\overline{0}}$ and $\ket{\overline{1}}$ are {\em $+1$-eigenvectors} of the stabilizers, we can describe any encoded state $\ket{\overline{\psi}}$ as a linear combination of the $(+1)$-eigenvectors of the stabilizers.
+
+\item Complete the following {\em commutation} table: use $0$ for commuting and $1$ for anti-commuting.
+
+{\footnotesize
+\begin{center}
+\begin{tabular}{|c||ccc|ccc|ccc|ccc|ccc|c|} \hline
+                        & $X_1$ & $Y_1$ & $Z_1$ & $X_2$ & $Y_2$ & $Z_2$ & $X_3$ & $Y_3$ & $Z_3$ & $X_4$ & $Y_4$ & $Z_4$ & $X_5$ & $Y_5$ & $Z_5$ & $I$ \\ \hline
+$M_1=Z_2 X_3 X_4 Z_5$   &0 &0 &0          &1 &1 &0          &0 &1 &1          &0 &1 &1          &1 &1 &0          &0     \\
+$M_2=Z_3 X_4 X_5 Z_1$   &1 &1 &0          &0 &0 &0          &1 &1 &0          &0 &1 &1          &0 &1 &1          &0    \\
+$M_3=Z_4 X_5 X_1 Z_2$   &0 &1 &1          &1 &1 &0          &0 &0 &0          &1 &1 &0          &0 &1 &1          &0     \\
+$M_4=Z_5 X_1 X_2 Z_3$   &0 &1 &1          &0 &1 &1          &1 &1 &0          &0 &0 &0          &1 &1 &0          &0     \\ \hline
+\end{tabular}
+\end{center}
+}
+
+\item Consider the following circuit for the $5$-qubit quantum error correction code.
+Assume the circuit $\mbox{\sc enc}$ correctly encodes the qubit $\ket{\psi}$ into its encoded state $\ket{\overline{\psi}}$.
+Assume all measurements are in the $Z$ basis (rectilinear basis).
+
+\begin{center}
+\tikzset{boom/.style={starburst, fill=yellow,draw=red,line width=1.5pt,inner xsep=-4pt,inner ysep=-5pt}}
+\begin{quantikz}[wire types={q,q,q,q,q,n,n,n,n,n}]
+\lstick{$\ket{\psi}_1$} & \gate[5]{\textsc{enc}} & \gate[5,style={boom}]{\textit{err}} & & \ghost{I} & \ghost{I} & \ghost{I}\gategroup[10,steps=5,style={dashed}]{\textit{detection}} & \gate{Z} & \gate{X} & \gate{X} & 			&				& \ghost{I}\gategroup[10,steps=1,style={dashed}]{\textit{correction}} 			 & \ghost{I} \\
+\lstick{$\ket{0}_2$}  &               	& 								& & & & \gate{Z} & 		  & \gate{Z} & \gate{X} & 				&				& 	& \\
+\lstick{$\ket{0}_3$}  &               	& 								& & & & \gate{X} & \gate{Z} & 		 & \gate{Z} & 				&				& 	& \\
+\lstick{$\ket{0}_4$}  &               	& 								& & & & \gate{X} & \gate{X} & \gate{Z} & 		& 				&				&	& \\
+\lstick{$\ket{0}_5$}  &               	& 								& & & & \gate{Z} & \gate{X} & \gate{X} & \gate{Z} & 			&				& \gate{Y}	& \\
+					&					&								& & & &			& 		  &			 &			& 				&				& 	& \\
+					& & & & \lstick{$\ket{+}_6$} 			& \setwiretype{q} & \ctrl{-5} & 		  &			 &			& \meter{} 		& \setwiretype{c} & \ctrl[vertical wire=c]{-2} \\
+					& & & & \lstick{$\ket{+}_7$} 			& \setwiretype{q} &			& \ctrl{-7} & 		 &			& \meter{} 		& \setwiretype{c} & \ctrl[vertical wire=c]{-3} \\
+					& & & & \lstick{$\ket{+}_8$} 			& \setwiretype{q} &			& 			& \ctrl{-8} & 		& \meter{} 		& \setwiretype{c} & \ctrl[vertical wire=c]{-4} \\
+					& & & & \lstick{$\ket{+}_9$} 			& \setwiretype{q} & 		&			& 			& \ctrl{-9} & \meter{} 	& \setwiretype{c} & \ctrl[vertical wire=c]{-5} 
+\end{quantikz}
+\end{center}
+
+	\begin{enumerate}
+	\item (T/F) The {\em detection} module is correct.
+
+    True the detection module is correct since it applies $M_1$ - $M_4$. Given that
+    \begin{gather*}
+      M_1 = I \otimes Z \otimes X \otimes X \otimes Z\\
+      M_2 = Z \otimes I \otimes Z \otimes X \otimes X\\
+      M_3 = X \otimes Z \otimes I \otimes Z \otimes X\\
+      M_4 = X \otimes X \otimes Z \otimes I \otimes Z\\
+    \end{gather*}
+	
+  \item (T/F) The {\em correction} module is correct for error $Y_5$.
+
+    True the correction Y gate will only get activated if all of the stabilizers measure $\ket{-}$.
+
+	\item Expand the correction module to handle {\em all} other $Y$ errors.
+\begin{center}
+\tikzset{boom/.style={starburst, fill=yellow,draw=red,line width=1.5pt,inner xsep=-4pt,inner ysep=-5pt}}
+\begin{quantikz}[wire types={q,q,q,q,q,n,n,n,n,n}]
+  \lstick{$\ket{\psi}_1$} & \gate[5]{\textsc{enc}} & \gate[5,style={boom}]{\textit{err}} & & \ghost{I} & \ghost{I} & \ghost{I}\gategroup[10,steps=5,style={dashed}]{\textit{detection}} & \gate{Z} & \gate{X} & \gate{X} & 			&				& \ghost{I}\gategroup[10,steps=5,style={dashed}]{\textit{correction}}& \ghost{I} &&&\gate{Y}&\\
+  \lstick{$\ket{0}_2$}  &               	& 								& & & & \gate{Z} & 		  & \gate{Z} & \gate{X} & 				&				& 	& && \gate{Y} &&\\
+  \lstick{$\ket{0}_3$}  &               	& 								& & & & \gate{X} & \gate{Z} & 		 & \gate{Z} & 				&				& 	&  & \gate{Y} &&&\\
+\lstick{$\ket{0}_4$}  &               	& 								& & & & \gate{X} & \gate{X} & \gate{Z} & 		& 				&				&	 &\gate{Y}&&&& \\
+\lstick{$\ket{0}_5$}  &               	& 								& & & & \gate{Z} & \gate{X} & \gate{X} & \gate{Z} & 			&				& \gate{Y}	&&&&& \\
+					&					&								& & & &			& 		  &			 &			& 				&				& 	& \\
+          & & & & \lstick{$\ket{+}_6$} 			& \setwiretype{q} & \ctrl{-5} & 		  &			 &			& \meter{} 		& \setwiretype{c} & \ctrl[vertical wire=c]{-2} & \ctrl[vertical wire=c]{-3} & \ctrl[vertical wire=c]{-4} & \ctrl[vertical wire=c]{-5} & \octrl[vertical wire=c]{-6}\\
+          & & & & \lstick{$\ket{+}_7$} 			& \setwiretype{q} &			& \ctrl{-7} & 		 &			& \meter{} 		& \setwiretype{c} & \ctrl[vertical wire=c]{-3} & \ctrl[vertical wire=c]{-4} & \ctrl[vertical wire=c]{-5} & \octrl[vertical wire=c]{-6} & \ctrl[vertical wire=c]{-7}\\
+          & & & & \lstick{$\ket{+}_8$} 			& \setwiretype{q} &			& 			& \ctrl{-8} & 		& \meter{} 		& \setwiretype{c} & \ctrl[vertical wire=c]{-4} & \ctrl[vertical wire=c]{-5} & \octrl[vertical wire=c]{-6} & \ctrl[vertical wire=c]{-7} & \ctrl[vertical wire=c]{-8}\\
+          & & & & \lstick{$\ket{+}_9$} 			& \setwiretype{q} & 		&			& 			& \ctrl{-9} & \meter{} 	& \setwiretype{c} & \ctrl[vertical wire=c]{-5} & \octrl[vertical wire=c]{-6} & \ctrl[vertical wire=c]{-7} & \ctrl[vertical wire=c]{-8} & \ctrl[vertical wire=c]{-9}
+\end{quantikz}
+\end{center}
+
+	\item Expand the correction module to handle {\em all} other errors on the $5$th qubit.
+    \begin{center}
+\tikzset{boom/.style={starburst, fill=yellow,draw=red,line width=1.5pt,inner xsep=-4pt,inner ysep=-5pt}}
+\begin{quantikz}[wire types={q,q,q,q,q,n,n,n,n,n}]
+  \lstick{$\ket{\psi}_1$} & \gate[5]{\textsc{enc}} & \gate[5,style={boom}]{\textit{err}} & & \ghost{I} & \ghost{I} & \ghost{I}\gategroup[10,steps=5,style={dashed}]{\textit{detection}} & \gate{Z} & \gate{X} & \gate{X} & 			&				& \ghost{I}\gategroup[10,steps=3,style={dashed}]{\textit{correction}} 			 & \ghost{I} &&\\
+\lstick{$\ket{0}_2$}  &               	& 								& & & & \gate{Z} & 		  & \gate{Z} & \gate{X} & 				&				& 	&  &&\\
+\lstick{$\ket{0}_3$}  &               	& 								& & & & \gate{X} & \gate{Z} & 		 & \gate{Z} & 				&				& 	& && \\
+\lstick{$\ket{0}_4$}  &               	& 								& & & & \gate{X} & \gate{X} & \gate{Z} & 		& 				&				&	& &&\\
+\lstick{$\ket{0}_5$}  &               	& 								& & & & \gate{Z} & \gate{X} & \gate{X} & \gate{Z} & 			&				& \gate{Y}	& \gate{X} & \gate{Z} &\\
+					&					&								& & & &			& 		  &			 &			& 				&				& 	& \\
+          & & & & \lstick{$\ket{+}_6$} 			& \setwiretype{q} & \ctrl{-5} & 		  &			 &			& \meter{} 		& \setwiretype{c} & \ctrl[vertical wire=c]{-2}  & \ctrl[vertical wire=c]{-2} & \octrl[vertical wire=c]{-2}\\
+          & & & & \lstick{$\ket{+}_7$} 			& \setwiretype{q} &			& \ctrl{-7} & 		 &			& \meter{} 		& \setwiretype{c} & \ctrl[vertical wire=c]{-3} & \octrl[vertical wire=c]{-3} & \ctrl[vertical wire=c]{-3}\\
+          & & & & \lstick{$\ket{+}_8$} 			& \setwiretype{q} &			& 			& \ctrl{-8} & 		& \meter{} 		& \setwiretype{c} & \ctrl[vertical wire=c]{-4}  & \octrl[vertical wire=c]{-4} & \ctrl[vertical wire=c]{-4}\\
+          & & & & \lstick{$\ket{+}_9$} 			& \setwiretype{q} & 		&			& 			& \ctrl{-9} & \meter{} 	& \setwiretype{c} & \ctrl[vertical wire=c]{-5} & \ctrl[vertical wire=c]{-5} & \octrl[vertical wire=c]{-5}
+\end{quantikz}
+\end{center}
+	\end{enumerate}
+
+
+\item (CS569) Consider the following encoding circuit for the $5$-qubit quantum error correction code.
+
+\begin{center}
+\begin{quantikz}
+\lstick{$\ket{0}_1$} 	& \ghost{I}\gategroup[10,steps=9,style={dashed}]{\textsc{enc}}  & \gate{Z} & \gate{X} & \gate{X} & \gate{Z} & & & & \gate{X} & \rstick[5]{$\ket{\overline{0}}$} \\
+\lstick{$\ket{0}_2$}  	& \gate{Z} & 	  	  & \gate{Z} & \gate{X} & \gate{Z} & & & & \gate{X} & \\
+\lstick{$\ket{0}_3$}  	& \gate{X} & \gate{Z} &			 & \gate{Z} & \gate{Z} & & & & \gate{X} & \\
+\lstick{$\ket{0}_4$}  	& \gate{X} & \gate{X} & \gate{Z} & 		  	& \gate{Z} & & & & \gate{X} & \\
+\lstick{$\ket{0}_5$}  	& \gate{Z} & \gate{X} & \gate{X} & \gate{Z} & \gate{Z} & & & & \gate{X} & \\
+\lstick{$\ket{+}_6$}	& \ctrl{-4}& 		  &			 &			& 		   & \\
+\lstick{$\ket{+}_7$}	& 		   &\ctrl{-6} & 		 &			& 		   & \\
+\lstick{$\ket{+}_8$} 	&  		   & 		  & \ctrl{-7}& 			& 		   & \\
+\lstick{$\ket{+}_9$} 	&  		   &		  & 		 & \ctrl{-8}& 		   & \\
+\lstick{$\ket{+}_{10}$}	&  		   &		  & 		 & 			& \ctrl{-9}& \gate{H} & \meter{} & \setwiretype{c} & \ctrl[vertical wire=c]{-9} 
+\end{quantikz}
+\end{center}
+
+	\begin{enumerate}
+	\item Let $\overline{Z}=Z_1 Z_2 Z_3 Z_4 Z_5$. 
+		\begin{enumerate}
+		\item (T/F) $\overline{Z}$ commutes with all $M_k$, $k=1,2,3,4$.
+      \begin{gather*}
+        M_0 \text{ and } \overline{Z} \text{ commute}\\
+        M_0 = I \otimes Z \otimes X \otimes X \otimes Z\\
+        \overline{Z} = Z \otimes Z \otimes Z \otimes Z \otimes Z\\
+        M_0 * \overline{Z} = +1 * +1 * -1 * -1 * +1 = +1
+      \end{gather*}
+
+      \begin{gather*}
+        M_1 \text{ and } \overline{Z} \text{ commute}\\
+        M_1 = Z \otimes I \otimes Z \otimes X \otimes X\\
+        \overline{Z} = Z \otimes Z \otimes Z \otimes Z \otimes Z\\
+        M_1 * \overline{Z} = +1 * +1 * +1 * -1 * -1 = +1
+      \end{gather*}
+
+      \begin{gather*}
+        M_2 \text{ and } \overline{Z} \text{ commute}\\
+        M_2 = X \otimes Z \otimes I \otimes Z \otimes X\\
+        \overline{Z} = Z \otimes Z \otimes Z \otimes Z \otimes Z\\
+        M_2 * \overline{Z} = -1 * +1 * +1 * +1 * -1 = +1
+      \end{gather*}
+
+      \begin{gather*}
+        M_3 \text{ and } \overline{Z} \text{ commute}\\
+        M_3 = X \otimes X \otimes Z \otimes I \otimes Z\\
+        \overline{Z} = Z \otimes Z \otimes Z \otimes Z \otimes Z\\
+        M_3 * \overline{Z} = -1 * -1 * +1 * +1 * +1 = +1
+      \end{gather*}
+
+      True, $\overline{Z}$ commutes with all of the stabilizers.
+
+		\item (T/F) $\ket{\overline{0}}$ is a $(+1)$-eigenvector of $\overline{Z}$ but $\ket{\overline{1}}$ is a $(-1)$-eigenvector of $\overline{Z}$.
+
+      \begin{gather*}
+        \ket{\overline{0}} = \ket{0} \otimes \ket{0} \otimes \ket{0} \otimes \ket{0} \otimes \ket{0}\\
+        \overline{Z} = Z \otimes Z \otimes Z \otimes Z \otimes Z\\
+        \overline{Z}\ket{\overline{0}} = +1 * +1 * +1 * +1 * +1 = +1
+      \end{gather*}
+
+      \begin{gather*}
+        \ket{\overline{1}} = \ket{1} \otimes \ket{1} \otimes \ket{1} \otimes \ket{1} \otimes \ket{1}\\
+        \overline{Z} = Z \otimes Z \otimes Z \otimes Z \otimes Z\\
+        \overline{Z}\ket{\overline{1}} = -1 * -1 * -1 * -1 * -1 = -1
+      \end{gather*}
+
+      True, $\overline{Z}\ket{\overline{0}} = \ket{\overline{0}}$ and $\overline{Z}\ket{\overline{1}} = -\ket{\overline{1}}$
+
+		\end{enumerate}
+	\item (T/F) The circuit will encode qubit $\ket{0}$ into its encoded state $\ket{\overline{0}}$.
+
+    \begin{gather*}
+      \ket{00000} \otimes \ket{+++++} = \ket{00000} \otimes (\frac{\ket{0} + \ket{1}}{\sqrt{2}})(\frac{\ket{0} + \ket{1}}{\sqrt{2}})(\frac{\ket{0} + \ket{1}}{\sqrt{2}})(\frac{\ket{0} + \ket{1}}{\sqrt{2}})(\frac{\ket{0} + \ket{1}}{\sqrt{2}})\\
+      = \ket{00000} \otimes (\frac{I + M_1}{\sqrt{2}})(\frac{I + M2}{\sqrt{2}})(\frac{I + M_3}{\sqrt{2}})(\frac{I + M_4}{\sqrt{2}})(\frac{Z + ZX}{\sqrt{2}})\\
+      = \ket{\overline{0}}(\frac{Z+ZX}{\sqrt{2}})
+    \end{gather*}
+
+    Next, we can perform the Z parity messurement if the result is +1, we don't apply X. If the result is -1 we apply X, since we had $\ket{\overline{1}}$ instead of $\ket{\overline{0}}$.
+
+    True.
+
+	\item Describe how the above circuit can be used to encode $\ket{1}$ into the encoded state $\ket{\overline{1}}$.
+
+    The same circuit could be using to encode $\ket{1}$ into $\ket{\overline{1}}$ by simply swapping qu-bit 1 for $\ket{1}$.
+	\end{enumerate}
+
+\end{enumerate}
+ 
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
